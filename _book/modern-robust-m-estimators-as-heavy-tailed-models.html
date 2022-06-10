@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Modern Robust M-estimators as heavy-tailed models | Robust Statistics Notes</title>
+  <meta name="description" content="Let us study together." />
+  <meta name="generator" content="bookdown 0.26.3 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Modern Robust M-estimators as heavy-tailed models | Robust Statistics Notes" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://github.com/williamsDlin/RobStat.git/path to the social sharing image like images/cover.jpg" />
+  <meta property="og:description" content="Let us study together." />
+  <meta name="github-repo" content="williamsDlin/RobStat" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Modern Robust M-estimators as heavy-tailed models | Robust Statistics Notes" />
+  
+  <meta name="twitter:description" content="Let us study together." />
+  <meta name="twitter:image" content="https://github.com/williamsDlin/RobStat.git/path to the social sharing image like images/cover.jpg" />
+
+<meta name="author" content=" Williams D Lin, Peter Wu, Phillipe Gagnon" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="classical-robust-regression-introduction-to-the-m-estimation.html"/>
+<link rel="next" href="other-robust-regression-methods.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Robust Statistic Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html"><i class="fa fa-check"></i><b>2</b> Classical Linear Regression</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#General-Model"><i class="fa fa-check"></i><b>2.1</b> General Model</a></li>
+<li class="chapter" data-level="2.2" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#classical-assumptions-about-random-errors"><i class="fa fa-check"></i><b>2.2</b> Classical Assumptions about Random Errors</a></li>
+<li class="chapter" data-level="2.3" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>2.3</b> Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="2.4" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#ordinary-least-squares-estimation"><i class="fa fa-check"></i><b>2.4</b> Ordinary Least Squares Estimation</a></li>
+<li class="chapter" data-level="2.5" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#Experi"><i class="fa fa-check"></i><b>2.5</b> Experiments using Classical Linear Regression Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html"><i class="fa fa-check"></i><b>3</b> Classical Robust Regression: introduction to the M-estimation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#motivation"><i class="fa fa-check"></i><b>3.1</b> Motivation</a></li>
+<li class="chapter" data-level="3.2" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#DefM"><i class="fa fa-check"></i><b>3.2</b> Definitions and Examples in the M-estimation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#origin-and-initial-definition-of-m-estimators"><i class="fa fa-check"></i><b>3.2.1</b> Origin and Initial Definition of M-estimators</a></li>
+<li class="chapter" data-level="3.2.2" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#examples-and-the-ultimate-definition-of-the-m-estimators"><i class="fa fa-check"></i><b>3.2.2</b> Examples and the Ultimate Definition of the M-estimators</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#compute"><i class="fa fa-check"></i><b>3.3</b> Theoretical Foudation of the Computing</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#general-philosophy-iterate-and-reweight"><i class="fa fa-check"></i><b>3.3.1</b> General Philosophy: Iterate and Reweight !</a></li>
+<li class="chapter" data-level="3.3.2" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#estimate-sigma-beforehand"><i class="fa fa-check"></i><b>3.3.2</b> Estimate <span class="math inline">\(\sigma\)</span> beforehand</a></li>
+<li class="chapter" data-level="3.3.3" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#estimate-coefficients-beta-and-scale-sigma-simultaneously"><i class="fa fa-check"></i><b>3.3.3</b> Estimate Coefficients <span class="math inline">\(\beta\)</span> and Scale <span class="math inline">\(\sigma\)</span> Simultaneously</a></li>
+<li class="chapter" data-level="3.3.4" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#starting-value"><i class="fa fa-check"></i><b>3.3.4</b> Starting Value</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#robust-regression-experiment"><i class="fa fa-check"></i><b>3.4</b> Robust Regression Experiment</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#monotone-m-estimator-huber-estimator"><i class="fa fa-check"></i><b>3.4.1</b> Monotone M-estimator: Huber Estimator</a></li>
+<li class="chapter" data-level="3.4.2" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#redescending-m-estimator-bisquare-estimator"><i class="fa fa-check"></i><b>3.4.2</b> Redescending M-estimator: Bisquare Estimator</a></li>
+<li class="chapter" data-level="3.4.3" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#revisit-to-the-ols-and-comparison"><i class="fa fa-check"></i><b>3.4.3</b> Revisit to the OLS and Comparison</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="modern-robust-m-estimators-as-heavy-tailed-models.html"><a href="modern-robust-m-estimators-as-heavy-tailed-models.html"><i class="fa fa-check"></i><b>4</b> Modern Robust M-estimators as heavy-tailed models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="modern-robust-m-estimators-as-heavy-tailed-models.html"><a href="modern-robust-m-estimators-as-heavy-tailed-models.html#introduction-to-lptn"><i class="fa fa-check"></i><b>4.1</b> Introduction to LPTN</a></li>
+<li class="chapter" data-level="4.2" data-path="modern-robust-m-estimators-as-heavy-tailed-models.html"><a href="modern-robust-m-estimators-as-heavy-tailed-models.html#robustness-when-using-lptn"><i class="fa fa-check"></i><b>4.2</b> Robustness when using LPTN</a></li>
+<li class="chapter" data-level="4.3" data-path="modern-robust-m-estimators-as-heavy-tailed-models.html"><a href="modern-robust-m-estimators-as-heavy-tailed-models.html#efficiency-of-the-lptn-model"><i class="fa fa-check"></i><b>4.3</b> Efficiency of the LPTN Model</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="other-robust-regression-methods.html"><a href="other-robust-regression-methods.html"><i class="fa fa-check"></i><b>5</b> Other Robust Regression Methods</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="other-robust-regression-methods.html"><a href="other-robust-regression-methods.html#mm"><i class="fa fa-check"></i><b>5.1</b> MM-estimator</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="reflection-on-work-ethics-interns-diary.html"><a href="reflection-on-work-ethics-interns-diary.html"><i class="fa fa-check"></i><b>6</b> Reflection on Work Ethics– Intern’s Diary</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="reflection-on-work-ethics-interns-diary.html"><a href="reflection-on-work-ethics-interns-diary.html#communiation-communication-communication"><i class="fa fa-check"></i><b>6.1</b> Communiation! Communication! Communication!</a></li>
+<li class="chapter" data-level="6.2" data-path="reflection-on-work-ethics-interns-diary.html"><a href="reflection-on-work-ethics-interns-diary.html#file-management"><i class="fa fa-check"></i><b>6.2</b> File management</a></li>
+<li class="chapter" data-level="6.3" data-path="reflection-on-work-ethics-interns-diary.html"><a href="reflection-on-work-ethics-interns-diary.html#it-is-your-life"><i class="fa fa-check"></i><b>6.3</b> It is your LIFE</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><span style="font-size:140%;font-family:Roboto;font-variant:small-caps;font-style:normal;font-color:#A52a2a">Robust Statistics Notes</span></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="modern-robust-m-estimators-as-heavy-tailed-models" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Modern Robust M-estimators as heavy-tailed models<a href="modern-robust-m-estimators-as-heavy-tailed-models.html#modern-robust-m-estimators-as-heavy-tailed-models" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="introduction-to-lptn" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Introduction to LPTN<a href="modern-robust-m-estimators-as-heavy-tailed-models.html#introduction-to-lptn" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong><em>LPTN M-estimator</em></strong>, based on the LPTN ( log-Pareto-tailed-normal ) distribution, was first proposed in [Robustness to Outliers in Location-Scale Parameter Model Using Log-Regularly Varying Distributions]<span class="citation">(<a href="#ref-Desgagne" role="doc-biblioref">Desgagne 2015</a>)</span>. Theoretically, LPTN M-estimator would be a robust estimator that can effectively protect model against outliers while still consider the valuable input of data entry of large variance. The original distribution proposed is more general, but for the purpose of this document, the distribution demonstrated below is introduced in <span class="citation">(<a href="#ref-Gagnon" role="doc-biblioref">Philippe Gagnon, Alain Desgagné, and Bédard 2020</a>)</span>, where we assume the error terms <span class="math inline">\(\epsilon_i\)</span>s follows a LPTN distribution, denoted by <span class="math inline">\(LPTN(\varrho)\)</span> with a pre-set controller parameter <span class="math inline">\(LPTN(\varrho) \in (2\Phi(1) − 1, 1) ≈ (0.6827, 1).\)</span> Using the set up introduced in <a href="Classical-Linear-Regression.html#Classical-Linear-Regression">General Model (Section 2.1)</a>, the density <span class="math inline">\(f\)</span> in <a href="Classical-Linear-Regression.html#eq:y-pdf">(2.5)</a> becomes</p>
+<p><span class="math display" id="eq:lptn">\[\begin{equation}
+    f(t) =
+    \begin{cases}
+        \varphi(t), &amp; \text{if}\ |t|\leq \tau, \\
+        \varphi(\tau)\frac{\tau}{|t|}\left(\frac{\log(\tau)}{\log|t|}\right)^{\lambda+1}, &amp;\text{if}\ |t|&gt;\tau,
+    \end{cases}
+\tag{4.1}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(t\in\mathbb{R}\)</span>, and <span class="math inline">\(\lambda&gt;0\)</span> and <span class="math inline">\(\tau&gt;1\)</span> are functions of <span class="math inline">\(\varrho\)</span>:</p>
+<p><span class="math display">\[\begin{align}
+    &amp;\tau = \Phi^{-1}((1+\varrho)/2):=\{\tau:\mathbb{P}(-\tau\leq\mathbb{Z}\leq\tau)=\varrho \; \text{for} \; \mathbb{Z} \; \overset{D}{\sim} \mathcal{N}(0,1)\}, \\
+    &amp;\lambda = 2(1-\varrho)^{-1}\varphi(\tau)\tau\log(\tau).
+\end{align}\]</span></p>
+<p><span class="math inline">\(\varphi()\)</span>, <span class="math inline">\(\Phi()\)</span>, and <span class="math inline">\(\Phi^{-1}()\)</span> are respectively the PDF, CDF, and inverse CDF of the standard Gaussian normal distribution.</p>
+<p>As we adjust the pre-set parameter <span class="math inline">\(\varrho\)</span>, we change how close the LPTN distribution approximates the standard normal distribution. As <span class="math inline">\(\varrho\)</span> increases, <span class="math inline">\(f\)</span> approaches the normal.
+An increase in <span class="math inline">\(\varrho\)</span> also implies an increase in <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\tau\)</span>, which translates into a density <span class="math inline">\(f\)</span> with lighter tails. <strong><em>Efficiency</em></strong> is also expected to <strong><em>increase</em></strong>, but <strong><em>robustness</em></strong> to <strong><em>decrease</em></strong>. A compromise has therefore to be made and it is controlled by the statistician through the parameter <span class="math inline">\(\varrho\)</span>. In other words, this parameter represents the <strong><em>tolerance to (bounded) impact from outliers at the benefit of efficiency when the data set is not contaminated</em></strong>.</p>
+<p>For example, the center of the density (the area <span class="math inline">\(|z| ≤ \tau\)</span>) was given by <span class="math inline">\(K(\rho,\lambda)\varphi(z)\)</span>. In order to pursue our <strong><em>efficiency objective</em></strong>, we set the constant to 1, which in return forces λ to be automatically set as a function of ρ. The parameter ρ, chosen by the user, thus represents the mass of the central part that exactly matches the N (0, 1) density.</p>
+<pre><code>So to research on the EFFCIENCY properties of LPTN, we have to know evaluate its performance given different DATA GENERATING CRITERIAs--- so what we need is simulation experiments? to assume the data sets are generated under different poluations, maybe as what we do in 
+• Scenario 0: f = N (0, 1),
+• Scenario1:f=95%N(0,1)+5%N(7,1), • Scenario2:f=90%N(0,1)+10%N(7,1),
+• Scenario 3: f = 95% N (0, 1) + 5% N (3, 1), where the xi of the outliers are modified
+to make them high-leverage points (the procedure is explained in detail below),
+• Scenario 4: f = 90% N (0, 1) + 10% N (3, 1),  where the xi of the outliers are modified to make them high-leverage points.
+
+But how can we achieve that? the data set SHOCK is fixed. to try my best I could evaluate the robustness in \beta when one or some outliers are extracted to the infinity, But how to make it following some certain true population if still using shock data.</code></pre>
+<p>The user can also select its value based on prior opinion about the probable proportion of outliers, by setting it to 1 minus this proportion.</p>
+<p>The rationale behind proposing the LPTN is thus that, in addition to exactly matching the normal density on the part with highest probability, this distribution has log-Pareto tails ensuring that our theoretical robustness result hold, and this for any value of <span class="math inline">\(\ρ\)</span>. This type of tails consequently accommodates for a large spectrum of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(F_0\)</span> in the mixture (3.1) when <span class="math inline">\(\alpha &lt; 1\)</span> and generates efficient inference when <span class="math inline">\(\alpha = 1\)</span> as well (this latter characteristic is discussed in Section 3.2). A comparison between different LPTN densities is shown in Figure 2.</p>
+<p>For better visualization, we plot the LPTN distribution with <span class="math inline">\(\varrho\)</span> equals to 0.80, 0.90, and 0.95 below.</p>
+<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" width="70%" /></p>
+<p>For the example, firstly we set the <span class="math inline">\(\varrho\)</span> at the value of 0.80, hence we could compute the LPTN M-estimator respectively associated with <strong><em>LPTN(0.80), LPTN(0.90), LPTN(0.95)</em></strong>, i.e., with <span class="math inline">\(\varrho\)</span> equals to 0.80, 0.90, 0.95. The estimates for <span class="math inline">\(\boldsymbol\beta\)</span> and <span class="math inline">\(\sigma\)</span> are respectively summarized as follows:</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Starting Estimation Method Chosen</th>
+<th align="center"><span class="math inline">\(\sigma^{LPTN(0.8)}\)</span></th>
+<th align="center"><span class="math inline">\(\hat\beta_0^{LPTN(0.8)}\)</span></th>
+<th align="center"><span class="math inline">\(\hat\beta_1^{LPTN(0.8)}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong><em>MM</em></strong></td>
+<td align="center">0.4069192</td>
+<td align="center">7.974943</td>
+<td align="center">-0.4230413</td>
+</tr>
+<tr class="even">
+<td align="center">Huber</td>
+<td align="center">2.2268981</td>
+<td align="center">9.561654</td>
+<td align="center">-0.5153956</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong><em>Bisquare</em></strong></td>
+<td align="center">0.4069192</td>
+<td align="center">7.974942</td>
+<td align="center">-0.4230412</td>
+</tr>
+<tr class="even">
+<td align="center">OLS</td>
+<td align="center">2.2306432</td>
+<td align="center">9.556700</td>
+<td align="center">-0.5153846</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong><em>OLS\(points removed)</em></strong></td>
+<td align="center">0.4069192</td>
+<td align="center">7.974942</td>
+<td align="center">-0.4230413</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="modern-robust-m-estimators-as-heavy-tailed-models.html#cb16-1" aria-hidden="true" tabindex="-1"></a>p5<span class="ot">&lt;-</span>p4<span class="sc">+</span><span class="fu">geom_abline</span>(<span class="at">intercept=</span><span class="fl">7.974942</span>,<span class="at">slope=</span>    <span class="sc">-</span><span class="fl">0.4230413</span>,<span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb16-2"><a href="modern-robust-m-estimators-as-heavy-tailed-models.html#cb16-2" aria-hidden="true" tabindex="-1"></a>p5 </span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>The LPTN(0.80) <span class="math inline">\(M\)</span>-estimator fit is shown below alongside other estimators discussed before. Follow professor gagnon’s advice, the LPTN estimators with MM-estimation as the starting point provides a very good fit, closely resembling the level of accuracy as the fit provided by the Bisquare M-estimator. We showed the LPTN fitted line in red above.</p>
+<p>For now, we should have noticed importance of choosing a starting point, which is also mentioned in the <a href="classical-robust-regression-introduction-to-the-m-estimation.html#compute">Theoretical Foudation of Computing</a> section. High quality will be really important. Great thanks to Professor Gagnon’s advice, we select the method the <strong><em>MM-estimation</em></strong> to derive our starting point. The dicussion on MM-estiamtion is arraged in <a href="other-robust-regression-methods.html#mm">the later section</a>. Although this new type of estimators looks like a twin of our M-estimators, they do have much difference.</p>
+</div>
+<div id="robustness-when-using-lptn" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Robustness when using LPTN<a href="modern-robust-m-estimators-as-heavy-tailed-models.html#robustness-when-using-lptn" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<pre><code>while illustrating the theoretical results of Theorem 1. </code></pre>
+<p>First we show that, when we artificially move an observation, its impact on the estimation grows until it reaches a certain threshold. Beyond this threshold, the impact decreases to nothing as the observation approaches plus or minus infinity.</p>
+<p>Second, a more traditional Bayesian analysis is made, in which we study the proportion of income spent on food. More precisely, we present the posterior distributions, with particular emphasis on the impact of outliers, and we compute various estimates from the posteriors.</p>
+<p>First we show that, when we artificially move an observation, its impact on the estimation <strong><em>STAYS THE SAME</em></strong></p>
+<p>The intercept estimate <span class="math inline">\(\hat{\boldsymbol\beta_{1}}^{LPTN(0.80)}\)</span> in a simple linear regression as an observation <span class="math inline">\(y_3^{∗}\)</span> goes from 0 to 50</p>
+<p><img src="Intercept_lptn_95" width="30%" style="display: block; margin: auto;" /><img src="Intercept_lptn_0.9" width="30%" style="display: block; margin: auto;" /><img src="Intercept_lptn_80" width="30%" style="display: block; margin: auto;" /></p>
+<p>The LPTN slope estimate <span class="math inline">\(\hat{\boldsymbol\beta_{1}}^{LPTN(0.80)}\)</span> in a simple linear regression as an observation <span class="math inline">\(y_3^{∗}\)</span> goes from 0 to 50</p>
+<p><img src="slope_lptn_95" width="30%" style="display: block; margin: auto;" /><img src="slope_lptn_90" width="30%" style="display: block; margin: auto;" /><img src="slope_lptn_80" width="30%" style="display: block; margin: auto;" /></p>
+<pre><code>Question
+to extract some points to the infinity to research on the robustness of LPTN M-estimators
+but pull which one and 
+how many should be pulled
+the lptn should be estimated at assuming varrho equal to how much?
+
+I , not surprisingly find that no matter which varrho set by me, the movement of the outlier do not affect it at all</code></pre>
+<p><strong><em>LPTN M-estimators using Different methods as Starting Point</em></strong></p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Starting Estimation Method Chosen</th>
+<th align="center"><span class="math inline">\(\sigma^{LPTN(0.8)}\)</span></th>
+<th align="center"><span class="math inline">\(\hat\beta_0^{LPTN(0.8)}\)</span></th>
+<th align="center"><span class="math inline">\(\hat\beta_1^{LPTN(0.8)}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong><em>MM</em></strong></td>
+<td align="center">0.4069192</td>
+<td align="center">7.974943</td>
+<td align="center">-0.4230413</td>
+</tr>
+<tr class="even">
+<td align="center">Huber</td>
+<td align="center">2.2268981</td>
+<td align="center">9.561654</td>
+<td align="center">-0.5153956</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong><em>Bisquare</em></strong></td>
+<td align="center">0.4069192</td>
+<td align="center">7.974942</td>
+<td align="center">-0.4230412</td>
+</tr>
+<tr class="even">
+<td align="center">OLS</td>
+<td align="center">2.2306432</td>
+<td align="center">9.556700</td>
+<td align="center">-0.5153846</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong><em>OLS(updated))</em></strong></td>
+<td align="center">0.4069192</td>
+<td align="center">7.974942</td>
+<td align="center">-0.4230413</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Starting Estimation Method</th>
+<th align="center"><span class="math inline">\(\sigma^{LPTN(0.9)}\)</span></th>
+<th align="center"><span class="math inline">\(\hat\beta_0^{LPTN(0.9)}\)</span></th>
+<th align="center"><span class="math inline">\(\hat\beta_1^{LPTN(0.9)}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong><em>MM</em></strong></td>
+<td align="center">0.6028035</td>
+<td align="center">8.149284</td>
+<td align="center">-0.4301010</td>
+</tr>
+<tr class="even">
+<td align="center">Huber</td>
+<td align="center">1.7350153</td>
+<td align="center">9.561538</td>
+<td align="center">-0.5153846</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong><em>Bisquare</em></strong></td>
+<td align="center">0.6028035</td>
+<td align="center">8.149284</td>
+<td align="center">-0.4301009</td>
+</tr>
+<tr class="even">
+<td align="center">OLS</td>
+<td align="center">1.7350155</td>
+<td align="center">9.561538</td>
+<td align="center">-0.5153846</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong><em>OLS(updated))</em></strong></td>
+<td align="center">0.6028041</td>
+<td align="center">8.149278</td>
+<td align="center">-0.4301004</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Starting Estimation Method</th>
+<th align="center"><span class="math inline">\(\sigma^{LPTN(0.95)}\)</span></th>
+<th align="center"><span class="math inline">\(\hat\beta_0^{LPTN(0.95)}\)</span></th>
+<th align="center"><span class="math inline">\(\hat\beta_1^{LPTN(0.95)}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong><em>M</em></strong>M</td>
+<td align="center">1.641843</td>
+<td align="center">9.742046</td>
+<td align="center">-0.5521902</td>
+</tr>
+<tr class="even">
+<td align="center"><strong><em>Huber</em></strong></td>
+<td align="center">1.641843</td>
+<td align="center">9.742046</td>
+<td align="center">-0.5521902</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong><em>Bisquare</em></strong></td>
+<td align="center">1.641844</td>
+<td align="center">9.742046</td>
+<td align="center">-0.5521901</td>
+</tr>
+<tr class="even">
+<td align="center"><strong><em>OLS</em></strong></td>
+<td align="center">1.641844</td>
+<td align="center">9.742046</td>
+<td align="center">-0.5521901</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong><em>OLS(updated)</em></strong></td>
+<td align="center">1.641844</td>
+<td align="center">9.742046</td>
+<td align="center">-0.5521902</td>
+</tr>
+</tbody>
+</table>
+<p>while <span class="math inline">\(\hat{\boldsymbol{\beta}}_{OLS-},\hat\sigma_{OLS-}=(7.2152 ,-0.3198 )\)</span></p>
+<p>This demonstrates a good starting point is superly important.</p>
+<ul>
+<li><p>Different starting points using the same LPTN(<span class="math inline">\(\varrho\)</span>) might be hugely different.</p></li>
+<li><p>When <span class="math inline">\(\varrho\)</span> is closer to 0.95, it is more robust since it even allows different starting points to converge round the same place.</p></li>
+<li><p>When <span class="math inline">\(\varrho\)</span> is closer to 0.95, it is more closer to <span class="math inline">\(\mathcal{N}\)</span></p></li>
+</ul>
+</div>
+<div id="efficiency-of-the-lptn-model" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Efficiency of the LPTN Model<a href="modern-robust-m-estimators-as-heavy-tailed-models.html#efficiency-of-the-lptn-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>evaluate the accuracy of the estimates arising from our model. In all analyses, we compare its performance with those of the nonrobust (the model with the normal assumption) and partially robust (the model with the Student distribution assumption) models.</p>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Desgagne" class="csl-entry">
+Desgagne, A. 2015. <span>“Robustness to Outliers in Location-Scale Parameter Model Using Log-Regularly Varying Distributions.”</span> <em>Annals of Statistics</em>, 43(4): 1568–1595. https://doi.org/<a href="MR3357871. doi: https://doi.org/10.1214/15-AOS1316. 390, 391, 394, 395, 398">MR3357871. doi: https://doi.org/10.1214/15-AOS1316. 390, 391, 394, 395, 398</a>.
+</div>
+<div id="ref-Gagnon" class="csl-entry">
+Philippe Gagnon, Alain Desgagné, and Mylène Bédard. 2020. <span>“A New Bayesian Approach to Robustness Against Outliers in Linear Regression.”</span> <em>Bayesian Anal.</em>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="classical-robust-regression-introduction-to-the-m-estimation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="other-robust-regression-methods.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/williamsDlin/RobStat.gitindex.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

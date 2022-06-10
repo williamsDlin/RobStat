@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Classical Robust Regression: introduction to the M-estimation | Robust Statistics Notes</title>
+  <meta name="description" content="Let us study together." />
+  <meta name="generator" content="bookdown 0.26.3 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Classical Robust Regression: introduction to the M-estimation | Robust Statistics Notes" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://github.com/williamsDlin/RobStat.git/path to the social sharing image like images/cover.jpg" />
+  <meta property="og:description" content="Let us study together." />
+  <meta name="github-repo" content="williamsDlin/RobStat" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Classical Robust Regression: introduction to the M-estimation | Robust Statistics Notes" />
+  
+  <meta name="twitter:description" content="Let us study together." />
+  <meta name="twitter:image" content="https://github.com/williamsDlin/RobStat.git/path to the social sharing image like images/cover.jpg" />
+
+<meta name="author" content=" Williams D Lin, Peter Wu, Phillipe Gagnon" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="Classical-Linear-Regression.html"/>
+<link rel="next" href="modern-robust-m-estimators-as-heavy-tailed-models.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Robust Statistic Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html"><i class="fa fa-check"></i><b>2</b> Classical Linear Regression</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#General-Model"><i class="fa fa-check"></i><b>2.1</b> General Model</a></li>
+<li class="chapter" data-level="2.2" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#classical-assumptions-about-random-errors"><i class="fa fa-check"></i><b>2.2</b> Classical Assumptions about Random Errors</a></li>
+<li class="chapter" data-level="2.3" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>2.3</b> Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="2.4" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#ordinary-least-squares-estimation"><i class="fa fa-check"></i><b>2.4</b> Ordinary Least Squares Estimation</a></li>
+<li class="chapter" data-level="2.5" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#Experi"><i class="fa fa-check"></i><b>2.5</b> Experiments using Classical Linear Regression Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html"><i class="fa fa-check"></i><b>3</b> Classical Robust Regression: introduction to the M-estimation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#motivation"><i class="fa fa-check"></i><b>3.1</b> Motivation</a></li>
+<li class="chapter" data-level="3.2" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#DefM"><i class="fa fa-check"></i><b>3.2</b> Definitions and Examples in the M-estimation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#origin-and-initial-definition-of-m-estimators"><i class="fa fa-check"></i><b>3.2.1</b> Origin and Initial Definition of M-estimators</a></li>
+<li class="chapter" data-level="3.2.2" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#examples-and-the-ultimate-definition-of-the-m-estimators"><i class="fa fa-check"></i><b>3.2.2</b> Examples and the Ultimate Definition of the M-estimators</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#compute"><i class="fa fa-check"></i><b>3.3</b> Theoretical Foudation of the Computing</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#general-philosophy-iterate-and-reweight"><i class="fa fa-check"></i><b>3.3.1</b> General Philosophy: Iterate and Reweight !</a></li>
+<li class="chapter" data-level="3.3.2" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#estimate-sigma-beforehand"><i class="fa fa-check"></i><b>3.3.2</b> Estimate <span class="math inline">\(\sigma\)</span> beforehand</a></li>
+<li class="chapter" data-level="3.3.3" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#estimate-coefficients-beta-and-scale-sigma-simultaneously"><i class="fa fa-check"></i><b>3.3.3</b> Estimate Coefficients <span class="math inline">\(\beta\)</span> and Scale <span class="math inline">\(\sigma\)</span> Simultaneously</a></li>
+<li class="chapter" data-level="3.3.4" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#starting-value"><i class="fa fa-check"></i><b>3.3.4</b> Starting Value</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#robust-regression-experiment"><i class="fa fa-check"></i><b>3.4</b> Robust Regression Experiment</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#monotone-m-estimator-huber-estimator"><i class="fa fa-check"></i><b>3.4.1</b> Monotone M-estimator: Huber Estimator</a></li>
+<li class="chapter" data-level="3.4.2" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#redescending-m-estimator-bisquare-estimator"><i class="fa fa-check"></i><b>3.4.2</b> Redescending M-estimator: Bisquare Estimator</a></li>
+<li class="chapter" data-level="3.4.3" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#revisit-to-the-ols-and-comparison"><i class="fa fa-check"></i><b>3.4.3</b> Revisit to the OLS and Comparison</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="modern-robust-m-estimators-as-heavy-tailed-models.html"><a href="modern-robust-m-estimators-as-heavy-tailed-models.html"><i class="fa fa-check"></i><b>4</b> Modern Robust M-estimators as heavy-tailed models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="modern-robust-m-estimators-as-heavy-tailed-models.html"><a href="modern-robust-m-estimators-as-heavy-tailed-models.html#introduction-to-lptn"><i class="fa fa-check"></i><b>4.1</b> Introduction to LPTN</a></li>
+<li class="chapter" data-level="4.2" data-path="modern-robust-m-estimators-as-heavy-tailed-models.html"><a href="modern-robust-m-estimators-as-heavy-tailed-models.html#robustness-when-using-lptn"><i class="fa fa-check"></i><b>4.2</b> Robustness when using LPTN</a></li>
+<li class="chapter" data-level="4.3" data-path="modern-robust-m-estimators-as-heavy-tailed-models.html"><a href="modern-robust-m-estimators-as-heavy-tailed-models.html#efficiency-of-the-lptn-model"><i class="fa fa-check"></i><b>4.3</b> Efficiency of the LPTN Model</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="other-robust-regression-methods.html"><a href="other-robust-regression-methods.html"><i class="fa fa-check"></i><b>5</b> Other Robust Regression Methods</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="other-robust-regression-methods.html"><a href="other-robust-regression-methods.html#mm"><i class="fa fa-check"></i><b>5.1</b> MM-estimator</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="reflection-on-work-ethics-interns-diary.html"><a href="reflection-on-work-ethics-interns-diary.html"><i class="fa fa-check"></i><b>6</b> Reflection on Work Ethics– Intern’s Diary</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="reflection-on-work-ethics-interns-diary.html"><a href="reflection-on-work-ethics-interns-diary.html#communiation-communication-communication"><i class="fa fa-check"></i><b>6.1</b> Communiation! Communication! Communication!</a></li>
+<li class="chapter" data-level="6.2" data-path="reflection-on-work-ethics-interns-diary.html"><a href="reflection-on-work-ethics-interns-diary.html#file-management"><i class="fa fa-check"></i><b>6.2</b> File management</a></li>
+<li class="chapter" data-level="6.3" data-path="reflection-on-work-ethics-interns-diary.html"><a href="reflection-on-work-ethics-interns-diary.html#it-is-your-life"><i class="fa fa-check"></i><b>6.3</b> It is your LIFE</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><span style="font-size:140%;font-family:Roboto;font-variant:small-caps;font-style:normal;font-color:#A52a2a">Robust Statistics Notes</span></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="classical-robust-regression-introduction-to-the-m-estimation" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Classical Robust Regression: introduction to the M-estimation<a href="classical-robust-regression-introduction-to-the-m-estimation.html#classical-robust-regression-introduction-to-the-m-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>To avoid any confusion with the <code>Robust Regression</code> methods talked about in this chapter, we clearly declare that – in a regression problem there are two possible sources of errors, the observations <span class="math inline">\(y_i\)</span> and the corresponding row vector of p regressors <span class="math inline">\(x_i\)</span>. Most robust methods in regression only consider the first, and in some cases (sucha as designed experiments) errors in the regressors can be ignored. This is the case for M-estimators, the only ones we consider in this chapter.</p>
+<div id="motivation" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Motivation<a href="classical-robust-regression-introduction-to-the-m-estimation.html#motivation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The lack of robustness in OLS estimate is a consequence of the assumption we have made about the distribution of the random errors being normal. This translate into a minimization of the sum of the squared residuals; the model thus penalizes large residuals heavily, hence making the influence of outliers significant which leads to an inaccurate fit.</p>
+<p>From another point of veiw, although removing 3 problematic data points, as one of the existed methods adopted by statistical analysts, leads to a greater performance result, the required subjective decisions also might pose a number of questions. Although the above example suggests a simple way, to detect and remove the outliers by the user, not everyone could recognize the suspicious points from the very beginning. Including such a query, questions could also be asked as follows:</p>
+<ul>
+<li>Which point, on earth, should be removed?</li>
+<li>When is an observation outlying enough to be deleted?</li>
+<li>What if deleting a non-outlier results in underestimating the data variability?</li>
+<li>How about the reliability of determining the statistical behavior of the complete procedure based on the user’s subjective decisions?</li>
+</ul>
+<p>Preferably, our ideal model should be able to “detect” the outliers and reduce their influences in the fitting process automatically. The latter is even preferable to excluding outliers. Indeed, in some situations, it is not as clear as with points with n.shocks equal to 0,1, and 3 whether certain points are outliers or not. In our example, other points (e.g., the point with n.shocks equal to 7) are suspicious but it is not clear whether they are outliers or not. This renders motivation for robust models: model that are less susceptible to outliers’ influence, and prioritizes the trend of the majority of the data rather than the outliers.</p>
+<blockquote>
+<p><font size=2 >“A more informal data-oriented characterization of robust methods is that they fit the bulk of the data well: if the data contain no outliers the robust method gives approximately the same results as the classical method, while if a small proportion of outliers are present the robust method gives approximately the same results as the classical method applied to the typical data.”</font></p>
+<p>— <font size=2 >from <span class="math inline">\(\textit{Robust Statistics Theory and Methods}\)</span></font></p>
+</blockquote>
+</div>
+<div id="DefM" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Definitions and Examples in the M-estimation<a href="classical-robust-regression-introduction-to-the-m-estimation.html#DefM" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Robust regression is to use a fitting criterion that is not as vulnerable as least squares to unusual data. The most common general method of robust regression is <strong><em>M-estimation</em></strong>. We divide this section into two. The first one would talk about the origin of M-estimation and its simple but beautiful version of definition, followed by the second section introducing some famous examples in classical M-estimation and develop a final version of definition.</p>
+<div id="origin-and-initial-definition-of-m-estimators" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Origin and Initial Definition of M-estimators<a href="classical-robust-regression-introduction-to-the-m-estimation.html#origin-and-initial-definition-of-m-estimators" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This class of estimators can be regarded as a generalization of maximum-likelihood estimation, hence the term <strong><em>M</em></strong>-estimation. To distinguish with common estimators we refer to before, we call all the estimators derived by using M-estimation method as <strong><em>M-estimators</em></strong>.</p>
+<p>Still consider the regression model in <a href="Classical-Linear-Regression.html#Classical-Linear-Regression">Genearl Model</a> section. Let us <strong><em>forget about scale <span class="math inline">\(\sigma\)</span> for a moment</em></strong>. That is, we assume <span class="math inline">\(\sigma\)</span> is known and fixed. Without losing generality, we may assume <span class="math inline">\(\sigma\)</span> = 1. The regression M-estimates <span class="math inline">\(\hat{\boldsymbol\beta}_M\)</span> are determined by minimizing a particular <strong><em>objective function</em></strong> <span class="math inline">\(\rho\)</span> that is</p>
+<p><span class="math display" id="eq:obj">\[\begin{align}
+\hat{\boldsymbol\beta}_M
+   &amp;:=\mathop{\mathrm{argmin}}\limits_{\boldsymbol\beta}\sum_{i=1}^n\rho ( r_i ) \\
+   &amp;=\mathop{\mathrm{argmin}}\limits_{\boldsymbol\beta}\ \sum_{i=1}^n\rho ( y_i -\mathbf{x}_i^T{\boldsymbol\beta}),
+\tag{3.1}
+\end{align}\]</span></p>
+<p>where the objective function <span class="math inline">\(\rho\)</span> outputs the contribution of each residual. A reasonable <span class="math inline">\(\rho\)</span> should have the following <strong><em>properties</em></strong>:</p>
+<ul>
+<li>Always nonnegative, <span class="math inline">\(\rho(t)≥ 0\)</span></li>
+<li>Equal to zero when its argument is zero, <span class="math inline">\(\rho(t)=0\)</span></li>
+<li>Symmetric, <span class="math inline">\(\rho(t) = \rho(-t)\)</span></li>
+<li>Monotone in <span class="math inline">\(|t_i|\)</span>, <span class="math inline">\(\rho(t_i) ≥ \rho(t_{i′} )\)</span> for <span class="math inline">\(|t_i| &gt; |t_{i′} |\)</span></li>
+</ul>
+<p>Equivalently, if <span class="math inline">\(\rho\)</span> is a differentiable convex function, <span class="math inline">\(\,\hat{\boldsymbol\beta}_M\)</span> is determined implicitly by a set of simultaneous equations in terms of <strong><em>influence curve</em></strong> <span class="math inline">\(\psi\)</span>-function <span class="math display">\[\psi := \rho′,\]</span> defined as the derivative of <span class="math inline">\(\rho\)</span>. The system of p + 1 estimating equations for the coefficients is produced by differentiating the objective function <a href="classical-robust-regression-introduction-to-the-m-estimation.html#eq:obj">(3.1)</a> with respect to the coefficients estimate <span class="math inline">\({\boldsymbol\beta}\)</span> and setting the partial derivatives to 0.</p>
+<p><span class="math display" id="eq:M-equation">\[\begin{equation}
+\sum_{i=1}^n\psi ( y_i − \mathbf{x}^T_i \hat{\boldsymbol\beta}_M)\mathbf{x}^T_i = 0.
+\tag{3.2}
+\end{equation}\]</span></p>
+<p>We define the <strong><em>weight function</em></strong></p>
+<p><span class="math display" id="eq:weight">\[\begin{align}
+w(t) := &amp;\frac{\psi(t)}{t},\\
+w_i  = &amp;w(r_i)=w(y_i-\mathbf{x}^T_i \hat{\boldsymbol\beta}_M)\,
+\tag{3.3}
+\end{align}\]</span></p>
+<p>where <span class="math inline">\(w_i\)</span> was denoted for short.</p>
+</div>
+<div id="examples-and-the-ultimate-definition-of-the-m-estimators" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Examples and the Ultimate Definition of the M-estimators<a href="classical-robust-regression-introduction-to-the-m-estimation.html#examples-and-the-ultimate-definition-of-the-m-estimators" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In fact, the <strong><em>OLS</em></strong> estimates <a href="Classical-Linear-Regression.html#eq:ssr">(2.13)</a> could be viewed as <code>a special case</code> of M-estimation, with <span class="math inline">\(\rho\)</span>-function <span class="math inline">\(\rho_{OLS}(t) = t^2\)</span> satisfies these requirements. The corresponding <span class="math inline">\(\psi\)</span>-function <span class="math inline">\(\psi_{OLS}(t)=t\)</span>, and weight function <span class="math inline">\(w_{OLS}(t)=1\)</span>. We introduce another <code>simple but convincing criteria</code> that consider the sum of absolute residuals (<strong><em>SAR</em></strong>)</p>
+<p><span class="math display" id="eq:sar">\[\begin{align}
+\mathit{SAR}:= &amp;\sum_{i=1}^n |r_i|,
+          \\ = &amp;\sum_{i=1}^n |y_i-\mathbf{x}_i^T \boldsymbol{\beta}|,
+\tag{3.4}
+\end{align}\]</span></p>
+<p>not the sum of squared residuals, which leads to derive the least abosolute residuals (<strong><em>LAR</em></strong>) regression estimate <span class="math inline">\(\hat{\boldsymbol\beta}_{LAR}\)</span>. It is defined as:</p>
+<p><span class="math display" id="eq:lar">\[\begin{equation}
+\hat{\boldsymbol\beta}_{LAR}:=\mathop{\mathrm{argmin}}\limits_{\beta}\sum_{i=1}^n|y_i-x_i\beta|
+\tag{3.5}
+\end{equation}\]</span></p>
+<p>The corresponding <span class="math inline">\(\rho\)</span>-function <span class="math inline">\(\rho_{LAR}(t) = |t|\)</span>, <span class="math inline">\(\psi\)</span>-function <span class="math inline">\(\psi_{LAR}(t)=sgn(t)\)</span>, and weight function <span class="math inline">\(w_{LAR}(t)=sgn(t)/t\)</span>. Under a variety of names LAR estimate (sometimes called as <strong><em>L1</em></strong>)<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> has been studied and applied by workers in several fields. Because it allows <code>large</code> residuals to have <code>less impact</code> than does OLS, the LAR estimator may seem attractive<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a> for robust regression. (For example, the median, its special case in estimating location, offers excellent resistance.)</p>
+<p>In principle, we do have <code>broad latitude</code> in choosing the function <span class="math inline">\(\rho(x)\)</span> and thus <span class="math inline">\(\psi(x)\)</span> and <span class="math inline">\(w(x)\)</span>. It is easy to find that the properties of an M-estimator are essentially determined by the function <span class="math inline">\(\rho(t)\)</span> (or, equivalently, by either <span class="math inline">\(\psi(x)\)</span> or <span class="math inline">\(w(x)\)</span>. One important issue in choosing <span class="math inline">\(\psi\)</span> is the balance between <strong><em>robustness and efficiency</em></strong><a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>. A useful principle serves well to classify the M-estimates is according to the monotonity of <span class="math inline">\(\psi\)</span>-function. Solutions to <a href="classical-robust-regression-introduction-to-the-m-estimation.html#eq:M-equation">(3.2)</a> equations with <strong><em>monotone</em></strong> (resp. <strong><em>redescending</em></strong>) <span class="math inline">\(\boldsymbol\psi\)</span> are called <strong><em>monotone</em></strong> (resp. <strong><em>redescending</em></strong>) <strong><em>regression M-estimates</em></strong>.</p>
+<p>In this document, we will select and introduce <strong><em>Huber M-estimators</em></strong> as the representative of monotone regression M-estimates and <strong><em>Bisquare M-estimators</em></strong> as the redescending regression M-estimates. Specificly, the corresponding functions in Huber M-estimators are defined as</p>
+<p><span class="math display">\[\begin{align}
+\rho_{Huber} =
+&amp;\begin{cases}
+\frac{1}{2}t^2   \quad       &amp;|t| \leqslant k
+\\
+k|t|-\frac{1}{2}k^2  \quad   &amp;|t|&gt;k &amp;
+\end{cases}, \\
+\psi_{Huber} =
+&amp;\begin{cases} t   \quad\quad\quad\quad\quad  &amp;|t|\leqslant k   
+\\
+k\,sgn(t) &amp;|t|  &gt; k \end{cases}  \quad, \\
+w_{Huber} =
+&amp;\begin{cases} 1  \quad\quad\quad\quad\,\,\;\,&amp;|t|\leqslant k\\
+\\
+k/t \quad  &amp;|t| &gt; k &amp;\end{cases},
+\end{align}\]</span></p>
+<p>where k in the Huber M-estimators is a <strong><em>tuning constant</em></strong>, which will be discussed on later. It is seen that <span class="math inline">\(\rho(t)\)</span> is still quadratic in a central region, same with the linear regression, but increases only linearly to infinity in the tail part.</p>
+<p>The Bisquare M-estimator, which takes on a much more aggressive approach when reducing the penalization of the outliers, as it truncates all the additional penalization of large outliers once they reach a threshold value. Also, this verifies its classification known as redescending estimators because their <span class="math inline">\(\psi\)</span>-functions come back to <span class="math inline">\(0\)</span> when the absolute value of the argument is greater than a specified positive number. The Bisquare estiamtors are defined as:</p>
+<p><span class="math display">\[\begin{align}
+\rho_{\mathit{Bisquare}} &amp;=
+\begin{cases}\frac{B^2}{6}\{1 -[1 - (t/B)^2  ]\}  \quad  &amp;|t| \leqslant B
+\\
+\frac{B^2}{6}    \quad            &amp;|t|  &gt; B \end{cases}    ,
+\\
+\psi_{\mathit{Bisquare}} &amp;=
+\begin{cases} t[1-(t/B)^2]^2  \quad       &amp;|t| \leqslant B
+\\
+0       \quad  &amp;|t| &gt; B \end{cases}   ,
+\\
+w_{\mathit{Bisquare}} &amp;=
+\begin{cases} t[1-(t/B)^2]^2  \quad  &amp;|t| \leqslant B
+\\
+0     \quad  &amp;|t|   &gt; B \end{cases}   ,
+\end{align}\]</span></p>
+<p>where B in the Bisquare estimators is also a tuning constant. When the type of function <span class="math inline">\(\psi\)</span> is fixed, the tuning constant determines the properties of the associated estimator, such as <em>efficiency</em>, <em>influence function</em>, and <em>gross-error sensitivity</em>. Take the k in the Huber-related funtions for example, the value of k is atually chosen in order to ensure a given asymptotic variance–hence a given asymptotic efficiency—-at the normal distribution.</p>
+<pre><code>About the tuning constant---MORE THEORIES NEEDED
+I am trying to include related contents in the short future, but it is okay to have little knowledge of them.</code></pre>
+<p>No matter what kind of M-estimators are chosen, the unavoidable mutual issue to deal with is how to efficiently compute the estimate in reality. We will continue to focus on the general computation technique to derive any kind of M-estimators.</p>
+<p>While initially defining <span class="math inline">\({\hat{\boldsymbol{\beta}}}_{OLS}\)</span> in <a href="Classical-Linear-Regression.html#eq:beta-ols">(2.16)</a> minimizing SSR or <span class="math inline">\(\hat{\boldsymbol\beta}_M\)</span> in <a href="classical-robust-regression-introduction-to-the-m-estimation.html#eq:M-def">(3.6)</a> and deriving the syste of estimating equations <a href="classical-robust-regression-introduction-to-the-m-estimation.html#eq:M-equation">(3.2)</a>, we assumed that the error scale parameter <span class="math inline">\(\sigma\)</span> is known and fixed, and we have often avoided showing it explicitly. In practice, however, same as how we include <span class="math inline">\(\sigma\)</span> and try to simultaneously compute the estimate for <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span> using MLE method in <a href="Classical-Linear-Regression.html#eq:mle-def">(2.11)</a>, <strong><em>scale often must be estimated</em></strong> for M-estimators for the following reasons:</p>
+<ul>
+<li><p>One reason for estimating scale is that some knowledge of it is necessary to judge the accuracy of the fitted regression model. In regression models users may want interval estimates for the <span class="math inline">\(\hat\beta_i\)</span> or for a <span class="math inline">\(\hat{y}\)</span>, or particularly similar as this document we may need to test whether a residual is an outlier.</p></li>
+<li><p>A second reason is that, without taking scale into account, most M-estimators of <span class="math inline">\(\boldsymbol\beta\)</span> would not respond correctly to a change in the units of y or to <span class="math inline">\(\sigma\)</span> change in the scale of the errors. The only familiar exceptions are the <span class="math inline">\(OLS\)</span> estimator and the LAR estimator. Since if we take scale into account through <span class="math inline">\(\sigma\)</span>, the OLS estimator <span class="math inline">\(\hat{\boldsymbol\beta}_{OLS}\)</span> satisfies</p></li>
+</ul>
+<p>From now on, let us bring back the scale estimator into account through <span class="math inline">\(\sigma\)</span>, the <strong><em>ultimate-version definition of the M-estimators</em></strong> are determined as:</p>
+<p><span class="math display" id="eq:M-def">\[\begin{align}
+(\hat{\boldsymbol\beta}_M,\hat\sigma_M) :=\mathop{\mathrm{argmin}}\limits_{\beta,\sigma}&amp;\sum_{i=1}^{n}\rho\left(r_i\right) \\
+=\mathop{\mathrm{argmin}}\limits_{\beta,\sigma}&amp;\sum_{i=1}^{n} {\rho\left(\frac{y_i-\mathbf{x}_i\boldsymbol\beta}{\sigma}\right)}
+\tag{3.6}.
+\end{align}\]</span></p>
+<p>This definition would be pretty crucial in the following passasge. Out of the aim to help learners grasp the logic of M-estimation in the previous sections, we frequently changing circumstances and subjects, but it is necessary to get familiar to and accept ultimately general version of M-estimators defined in @(eq:M-def).</p>
+</div>
+</div>
+<div id="compute" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Theoretical Foudation of the Computing<a href="classical-robust-regression-introduction-to-the-m-estimation.html#compute" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the one hand, without becoming enmeshed in the computational details, we still need to carefully look at some of the algorithms that have proved useful. Algorithms for M-estimators are generally iterative and thus require a starting value. It takes some matrix techniques to be illuminated to choose the iterative methods. On the other hand, for a regression model, however, obtaining a high-quality starting value presents a greater challenge than in the location problem, where the median is usually quite satisfactory. So both require the users to invest in some time studying them in a down-to-earth manner.</p>
+<p>It is interesting to point out that, in the two cases of the OLS estimate and the LAR estimate, whose <span class="math inline">\(\rho\)</span>-functions correspond respectively to <span class="math inline">\(\rho(t)= t^2\)</span> and <span class="math inline">\(\rho(t)= |t|\)</span>, they do not depend on <span class="math inline">\(\sigma\)</span> at all. Because <span class="math inline">\(\sigma\)</span> could be taken outside the summation sign as a constant factor and minimizing the objective function in <a href="classical-robust-regression-introduction-to-the-m-estimation.html#eq:M-def">(3.6)</a> is equivalent to minimizing <span class="math inline">\(\sum_{i=1}^n r^2\)</span> or <span class="math inline">\(\sum_{i=1}^n |r|\)</span>, respectively. Thus neither the LS nor the L1 estimates require a scale estimate, that is also why they are always choosed as an intial regression estimate for coefficients.</p>
+<p><span class="math display" id="eq:sigma-no-effect">\[\begin{align}
+\sum_{i=1}^{n}\left(\frac{y_i-\mathbf{x}_i\boldsymbol\beta}{\sigma}\right)^2  &amp;=\frac{1}{\sigma^2}\sum_{i=1}^{n}r_i^2(\boldsymbol\beta) \propto\sum_{i=1}^{n}r_i^2(\boldsymbol\beta)=min,  \\
+\sum_{i=1}^{n}\left|\frac{y_i-\mathbf{x}_i\boldsymbol\beta}{\sigma}\right|  &amp;=\frac{1}{{\sigma}}\sum_{i=1}^{n}\left|{r_i(\beta)}\right| \propto \sum_{i=1}^{n} |{r_i(\beta)}| =min.
+\tag{3.7}
+\end{align}\]</span></p>
+<p>Unfortunately, other M-estimators, such as Huber and Bisquare estimators, do depend on the scale parameter. So, even for estimating <span class="math inline">\(\beta\)</span> alone, we must estimate some aspect of scale at the same time. Basically, we have two kinds of strategies for dealing with scale in the regression problem.</p>
+<ul>
+<li>Estimate <span class="math inline">\(\sigma\)</span> beforehand.</li>
+<li>Estimate coefficients <span class="math inline">\(\beta\)</span> and scale <span class="math inline">\(\sigma\)</span> simultaneously</li>
+</ul>
+<div id="general-philosophy-iterate-and-reweight" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> General Philosophy: Iterate and Reweight !<a href="classical-robust-regression-introduction-to-the-m-estimation.html#general-philosophy-iterate-and-reweight" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Firstly, let us walk through how an iterative method is inspired in estimating the M-estimates when previously we assuame <span class="math inline">\(\sigma\)</span> is known as the constant 1.
+Review that replace <span class="math inline">\(\psi ( y_i − \mathbf{x}^T_i \hat{\boldsymbol\beta}_M)\)</span> by <span class="math inline">\(( y_i − \mathbf{x}^T_i \hat{\boldsymbol\beta}_M)w_i\)</span> in the equation(@ref:M-equation), then they could be written as</p>
+<p><span class="math display" id="eq:rw-equa">\[\begin{equation}
+\sum_{i=1}^n ( y_i − \mathbf{x}^T_i \hat{\boldsymbol\beta}_M)w_i\mathbf{x}^T_i = 0.
+\tag{3.8}
+\end{equation}\]</span></p>
+<p>Rearrangement of equation yields</p>
+<p><span class="math display">\[\begin{align}
+\sum_{i=1}^n  \mathbf{x}^T_i \hat{\boldsymbol\beta}_M w_i\mathbf{x}^T_i &amp;=    \sum_{i=1}^n y_i w_i\mathbf{x}^T_i \,, \\\\
+\sum_{i=1}^n   w_i\mathbf{x}^T_i \mathbf{x}^T_i \hat{\boldsymbol\beta}_M &amp;=    \sum_{i=1}^n w_i\mathbf{x}^T_i y_i \,,\\\\
+  \begin{bmatrix}
+  \mathbf{x}_1 \ldots \mathbf{x}_n
+  \end{bmatrix}
+  \begin{bmatrix}
+    w_{1} &amp; &amp; \\
+    &amp; \ddots &amp; \\
+    &amp; &amp; w_{n}
+  \end{bmatrix}
+  \begin{bmatrix}
+  \mathbf{x}_1^T \\
+  \vdots\\
+  \mathbf{x}_n^T\\
+  \end{bmatrix}
+  \begin{bmatrix}
+  1\\
+  {\hat{\mathbf{\beta}}_1}_M \\
+  \vdots\\
+  {\hat{\mathbf{\beta}}_p}_M\\
+  \end{bmatrix}
+  &amp;=
+  \begin{bmatrix}
+  \mathbf{x}_1 \ldots \mathbf{x}_n
+  \end{bmatrix}
+  \begin{bmatrix}
+    w_{1} &amp; &amp; \\
+    &amp; \ddots &amp; \\
+    &amp; &amp; w_{n}
+  \end{bmatrix}
+  \begin{bmatrix}
+  {y}_1\\
+  \vdots\\
+  {y}_n\\
+  \end{bmatrix}\,, \\\\
+  \hat{\boldsymbol\beta}_M &amp;= [\mathbf{X}^T\mathbf{W}\mathbf{X}]^{-1}\mathbf{X}^T\mathbf{W}\mathbf{y},\\\\
+  where\; we\;denote\;the\;matrix
+  \begin{bmatrix}
+    w_{1} &amp; &amp; \\
+    &amp; \ddots &amp; \\
+    &amp; &amp; w_{n}
+  \end{bmatrix} &amp;= \,\mathbf{W}.
+\end{align}\]</span></p>
+<p>Hence in the iterative process, we analyze the relationship between two consecutive iterations <span class="math inline">\(t\)</span> and <span class="math inline">\(t+1\)</span> through
+<span class="math display">\[\begin{align}
+\hat{\boldsymbol\beta}_M^{(t+1)} &amp;= [\mathbf{X}^T\mathbf{W}^{(t)}\mathbf{X}]^{-1}\mathbf{X}^T\mathbf{W}^{(t)}\mathbf{y},\\\\
+  while\;\hat{\boldsymbol\beta}_M^{(t)} &amp;= [\mathbf{X}^T\mathbf{W}^{(t)}\mathbf{X}]^{-1}\mathbf{X}^T\mathbf{W}^{(t)}\mathbf{X} \hat{\boldsymbol\beta}_M^{(t)},   \\\\
+so\; \hat{\boldsymbol\beta}_M^{(t+1)} &amp;= \hat{\boldsymbol\beta}_M^{(t)} +[\mathbf{X}^T\mathbf{W}^{(t)}\mathbf{X}]^{-1}\mathbf{X}^T\mathbf{W}^{(t)} (\mathbf{y}-\mathbf{X}\hat{\boldsymbol\beta}_M^{(t)}).
+\end{align}\]</span></p>
+<p>Solving the estimating equations in <a href="classical-robust-regression-introduction-to-the-m-estimation.html#eq:rw-equa">(3.8)</a> inspires us to adopt an iterative strategy to compute the M-estimators, because the weights, however, depend upon the residuals, the residuals depend upon the estimated coefficients, and the estimated coefficients depend upon the weights. An solution called <strong><em>Iteratively Reweighted Least Squares</em></strong> (<strong><em>IRLS</em></strong>) is therefore required:</p>
+<ul>
+<li>Select initial estimates <span class="math inline">\(\hat{\boldsymbol\beta}_M^{(0)}\)</span>, such as the <span class="math inline">\(LAR\)</span> or <span class="math inline">\(OLS\)</span> estimates. In usual, people sometimes call the initial values <strong><em>Starting Points,</em></strong> whose quality is actually very important for the ultimate converged result. We will see the large difference between different starting points in the <a href="#lptn">later part</a><br />
+</li>
+<li>At each iteration t, calculate residuals <span class="math inline">\(r_i^{(t−1)}\)</span> and associated weights <span class="math inline">\(w^{(t−1)} = w(r_i^{(t−1)})\)</span> from the previous iteration.</li>
+<li>Solve for new weighted-least-squares estimates <span class="math inline">\({\boldsymbol\beta}_M^{(t)} = [\mathbf{X}^T\mathbf{W}^{(t−1)}\mathbf{X}]^{-1}\mathbf{X}^T\mathbf{W}^{(t−1)}\mathbf{y}.\)</span></li>
+<li>Steps 2 and 3 are repeated until the estimated coefficients converge.</li>
+</ul>
+<p>The <span class="math inline">\(\mathbf{X}\)</span> is the model matrix, with <span class="math inline">\(\mathbf{x_i}^T\)</span> as its <span class="math inline">\(i\)</span>th row, and <span class="math inline">\(W^{(t−1)} = diag\{w_i^{(t−1)}\}\)</span> is the current weight matrix.</p>
+<p>One thing to add, actually there are other algorithms like <strong><em>Newton-Raphson Method</em></strong> or <strong><em>Huber’s Method</em></strong>. But to save for space, we might not thoroughly talk about them in this document. To have a bite of what Huber proposed, another iterative version is supplied below</p>
+<p><span class="math display">\[\begin{align}
+\hat{\boldsymbol\beta}^{(t+1)}
+&amp;=  (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y} \\
+&amp;= (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T( \mathbf{\hat{y}} + \mathbf{y} - \mathbf{\hat{y}}) \\
+&amp;= \hat{\boldsymbol\beta}^{(t)} + (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^Tr^{(t)} ,\\
+where \; r^{(t)} &amp;= \psi(r^{(t)}/\hat\sigma) \hat\sigma
+\end{align}\]</span></p>
+<p>Basically, if taking scale estimator into consideration, we have two kinds of strategies for dealing with scale in the regression problem.
+* Estimate <span class="math inline">\(\sigma\)</span> beforehand.
+* Estimate coefficients <span class="math inline">\(\beta\)</span> and scale <span class="math inline">\(\sigma\)</span> simultaneously</p>
+</div>
+<div id="estimate-sigma-beforehand" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Estimate <span class="math inline">\(\sigma\)</span> beforehand<a href="classical-robust-regression-introduction-to-the-m-estimation.html#estimate-sigma-beforehand" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This actually corresponds to the <strong><em>IRLS</em></strong> algorithm we mentioned previously when we assume that the <span class="math inline">\(\sigma\)</span> is known and fixed as <span class="math inline">\(1\)</span>. In pracitce, we have to choose an initial scale estimator and calculate its value, <span class="math inline">\(\hat\sigma\)</span>. The recommended procedure to get the most commonly used resistant scale estimator is first to compute the <span class="math inline">\(LAR\)</span> fit and from it obtain the analog of the normalized median absolute deviation (MAD) by taking the median of the nonnull absolute residuals:
+<span class="math display">\[
+\hat\sigma= \frac{1}{0.675} Med_i\left(|ri| \quad  |ri \neq 0\right),\\
+or\quad\hat\sigma= \frac{1}{0.675} Med_i\left(|ri - Med_j(r_j)|\right),\\
+r_t=y_t-\mathbf{x_t}\hat{\boldsymbol\beta}^{(0)},\;t \in \{i,j\},
+\]</span></p>
+<p>where <span class="math inline">\(\hat{\boldsymbol\beta}^{(0)}\)</span> is a preliminary estimate of <span class="math inline">\(\boldsymbol\beta\)</span> and 0.675 is the average value of the MAD for samples from the standard Gaussian distribution. What we still need here is an intial estimate for <span class="math inline">\(\beta\)</span>. Usually, as we mentioned beofre, the <span class="math inline">\({LAR}\)</span> estimate <span class="math inline">\(\hat\beta_{LAR}\)</span> is a convenient choice for <span class="math inline">\(\hat{\boldsymbol\beta}_M^{(0)}\)</span>. An important reason for the widespread use of the MAD is its excellent resistance: its breakdown bound is nearly 50%. The MAD has also proved to be a reasonably robust estimator of scale.</p>
+<pre><code>THE BOOK GIVES ？SEEMINGLY DIFFERENT NMAD FOR REGRESSIOIN PROBLEM IN THE SAME SETTING.</code></pre>
+<p>Sometimes we make the role of the tuning constant explicit by writing <span class="math display">\[\psi_0\left(\frac{y_i-\mathbf{x}_i{\boldsymbol\beta}}{c\hat\sigma}\right),\]</span> where c is a generic tuning constant and <span class="math inline">\(\psi_0\)</span> is the member of the particular family of <span class="math inline">\(\psi\)</span>-functions that has tuning constant 1 (e.g., the Huber <span class="math inline">\(\psi\)</span>-function with k = 1). Then, in discussing a choice of tuning constant, we must be careful to state whether <span class="math inline">\(\sigma\)</span> involves any standardizing constants, such as the 1/0.6745 in equation. Some discussions in the literature normalize MAD in this way, but others do not.</p>
+<p>Then, we could consider <span class="math inline">\(\sigma\)</span> as a known and fixed constant, we proceed with M-estimation for <span class="math inline">\(\boldsymbol\beta\)</span>; that is, we redifine <span class="math inline">\(\hat{\boldsymbol\beta}_M\)</span> as</p>
+<p><span class="math display">\[
+\hat{\boldsymbol\beta}_M:=\mathop{\mathrm{argmin}}\limits_{\beta} {\rho\left(\frac{y_i-\mathbf{x}_i\boldsymbol\beta}{\hat\sigma}\right)},
+\\
+which\;satisfies\;
+\sum_{i=1}^n\psi\left(  \frac{y_i-\mathbf{x}_i\hat{\boldsymbol\beta}_M}{\hat\sigma} \right)\mathbf{x}_i^T = \mathbf{0}.
+\]</span> Now it is obvious that we could again follow the <span class="math inline">\(\mathit{IRLS}\)</span> steps to ultimately compute the M-estimates. A slight difference should be paid attention to is that <span class="math inline">\(\mathbf{W}^{(t)}\)</span> is the new diagonal matrix with diagonal elements</p>
+<p><span class="math display">\[w_i= \frac  {  \psi (r_i / {\hat\sigma}) } {r_i / {\hat\sigma} },\]</span> distinguished with <span class="math inline">\(w_i= \frac { \psi (r_i) } {r_i }.\)</span> But the general recurrence relation</p>
+<p><span class="math display">\[\hat{\boldsymbol\beta}_M^{(t+1)} = \hat{\boldsymbol\beta}_M^{(t)}+[\mathbf{X}^T\mathbf{W}^{(t)}\mathbf{X}]^{-1}\mathbf{X}^T\mathbf{W}^{(t)} (\mathbf{y}-\mathbf{X}\hat{\boldsymbol\beta}_M^{(t)})\]</span> is the same.</p>
+</div>
+<div id="estimate-coefficients-beta-and-scale-sigma-simultaneously" class="section level3 hasAnchor" number="3.3.3">
+<h3><span class="header-section-number">3.3.3</span> Estimate Coefficients <span class="math inline">\(\beta\)</span> and Scale <span class="math inline">\(\sigma\)</span> Simultaneously<a href="classical-robust-regression-introduction-to-the-m-estimation.html#estimate-coefficients-beta-and-scale-sigma-simultaneously" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Again paralleling the previous estimation approach, we can set up an equation for scale that is compatible with the p simultaneous equations for <span class="math inline">\(\boldsymbol\beta\)</span> in <a href="#eq:simul">(<strong>??</strong>)</a>. Solving the resulting system of p+1 equations then yields simultaneous M-estimators of <span class="math inline">\(\boldsymbol\beta\)</span> and <span class="math inline">\(\sigma\)</span>. Specifically, these simultaneous equations take the form</p>
+<p><span class="math display">\[\begin{equation}
+\sum_{i=1}^{n}\psi(\frac{r_i(\hat{\boldsymbol{\beta})}}{\sigma}) \boldsymbol{x_i}=\textbf{0},\\
+\sum_{i=1}^{n}\chi(\frac{r_i(\hat{\boldsymbol{\beta})}}{\sigma}) \boldsymbol{x_i}=n\lambda , \#(eq:simul)
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\chi\)</span> is an even function, such as <span class="math inline">\(\psi(t)^2\)</span> or <span class="math inline">\(t\psi(t)\)</span>, and <span class="math inline">\(\lambda\)</span> is a suitable positive constant.</p>
+<p>To motivate the scale equation, we note that we could make <span class="math inline">\(\sum_{i=1}^{n} {\rho\left(\frac{y_i-\mathbf{x}_i\boldsymbol\beta}{\sigma}\right)}\)</span> as small as desired by simply allowing <span class="math inline">\(\sigma\)</span> to become large enough. The last equation in (***) rules out such nonsensical values of <span class="math inline">\(\sigma\)</span>. As Huber (1981, p. 176) points out, if <span class="math inline">\(\psi\)</span> and <span class="math inline">\(\chi\)</span> above are totally unrelated, there will be trouble with existence and convergence proofs for the simultaneous M-estimators. He avoids these difficulties by relating <span class="math inline">\(\chi\)</span> to <span class="math inline">\(\rho\)</span> and <span class="math inline">\(\psi\)</span> through</p>
+<p><span class="math display">\[
+\chi(t) = t\psi(t)-\rho(t) = \begin{cases}
+\frac{1}{2}t^2, \;for\,|t|  \leqslant k, \\
+\frac{1}{2}k^2,  \;for\,|t| &gt; k.
+\end{cases}
+\]</span></p>
+<p>We note that this formulation yields both a bounded <span class="math inline">\(\psi\)</span>-function and a bounded <span class="math inline">\(\chi\)</span>-function, thus limiting the impact of a large residual on both the regression estimate and the scale estimate. At last, we give without proof the iterative relation equation when simultaneously computing both coefficients estimate and scale estimate:</p>
+<p><span class="math display">\[\begin{equation}
+(\sigma^{(t+1)})^2   = \sum_{i=1}^n \chi \left( \frac{y_i - \mathbf{x}_i \hat{\boldsymbol{\beta}}^{(t)} } {\sigma^{(t)}}  \right){(\sigma^{(t)})}^2,  \\
+\hat{\boldsymbol\beta}_M^{(t+1)} = \hat{\boldsymbol\beta}_M^{(t)}+(\mathbf{X}^T\mathbf{W}^{(t)}\mathbf{X})^{-1}\mathbf{X}^T\mathbf{W}^{(t)} (\mathbf{y}-\mathbf{X}\hat{\boldsymbol\beta}_M^{(t)}).
+\end{equation}\]</span></p>
+</div>
+<div id="starting-value" class="section level3 hasAnchor" number="3.3.4">
+<h3><span class="header-section-number">3.3.4</span> Starting Value<a href="classical-robust-regression-introduction-to-the-m-estimation.html#starting-value" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>With any iterative method, choosing the starting value is an important issue. From a good starting value, a procedure will converge in fewer iterations and incur less computational cost. Iterative M-estimators are particularly sensitive to the starting value when the <span class="math inline">\(\psi\)</span>-function redescends. Given a poor starting value, an estimator with a non-monotone <span class="math inline">\(\psi\)</span>-function may converge to a root of equation @ref{eq:M-def} far from the overall minimum of the objective function in terms of <span class="math inline">\(\beta\)</span>.</p>
+<p>Usually we prefer a (Starting value to be resistant and have high efficiency. In the location problem, the sample median is considered the best convenient choice. Its natural generalization to regression models appears to be the LAR estimator. Harvey (1977) compared the LAR estimator with two other approaches, suggested, by Andrews (1974) and Hinich and Talwar (1975), respectively. The LAR estimator may be the most attractive preliminary estimator, because it has, on the whole, higher asymptotic efficiency than the other two. On the other hand, the LAR estimator may take too much computing time to be used solely as a starting value. It need not be unique, and it is even harder to calculate than most of the robust regression estimators that we intend to use.</p>
+<p>If the <span class="math inline">\(\psi\)</span>-function is monotone, the OLS estimator is still a conceivable choice. There is no trouble with convergence, the OLS estimator is easy to calculate, and almost every user wants to know the OLS results and compare them with the robust estimates.</p>
+<p>For a redescending, <span class="math inline">\(\psi\)</span>-function, besides starting with the LAR estimator of <span class="math inline">\(\beta\)</span>, we can also recommend the following strategy: Use a monotone ψ-function with the OLS estimates as the starting value, iterate to convergence, and then use the non-monotone ψ<span class="math inline">\(\psi\)</span>-function to iterate a few steps (perhaps only one) further.</p>
+<p>As we have mentioned before, if <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span> are estimated simultaneously, only the combination of equations (32) and (33) is known to ensure convergence. For this iteration scheme, both the OLS estimates and the LAR estimates are good choices as starting values. It is usually preferable to start with the OLS estimates and then, after iterating to convergence with a Huber <span class="math inline">\(\psi\)</span>-function and <span class="math inline">\(\chi\)</span>-function, to do a few iterations with a redescending <span class="math inline">\(\psi\)</span>-function and either a fixed <span class="math inline">\(\sigma\)</span> obtained from equation (32) in the Huber iterations or the MAD or fourth-spread of the residuals.</p>
+<p><code>A lot of work to be done to fully understand something internal.</code></p>
+</div>
+</div>
+<div id="robust-regression-experiment" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Robust Regression Experiment<a href="classical-robust-regression-introduction-to-the-m-estimation.html#robust-regression-experiment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now let’s do not hesitate any longer to try the robust regression in real data set. Robust regression is done by <span class="math inline">\(IRLS\)</span> introduced before. Although the theoretical part is seemingly complex, the command for running robust regression <strong><em>rlm</em></strong> was well developed in the <strong><em>MASS</em></strong> package. There are several weighting functions that can be used for <span class="math inline">\(IRLS\)</span>. We are going to first only focus on the performance of the <strong><em>Huber M-estimators</em></strong> and then the <strong><em>Bisuqre M-estimators</em></strong> in the <strong><em>shock</em></strong> example. In paticular, we will later revisit the <strong><em>OLS estimators</em></strong> and conduct analysis and comparisons with attempts to explain why the classical one is not robust, and hope to gain some new ideas.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span></code></pre></div>
+<div id="monotone-m-estimator-huber-estimator" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Monotone M-estimator: Huber Estimator<a href="classical-robust-regression-introduction-to-the-m-estimation.html#monotone-m-estimator-huber-estimator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For strengthening our impression on Huber M-estimators, we plot all the <span class="math inline">\(\rho\)</span> to <span class="math inline">\(\rho\)</span> and <span class="math inline">\(w\)</span> functions for Huber M-estimators in the same figure.
+<img src="index_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>We use k = 1.345 to analyze the data set shock using Huber-M linear regression. By solving <a href="classical-robust-regression-introduction-to-the-m-estimation.html#eq:M-def">(3.6)</a>, we obtain the estimated value for <span class="math inline">\(\hat{\boldsymbol\beta}_{Huber}\)</span> and <span class="math inline">\(\hat\sigma_{Huber}\)</span> to be approximately (9.82,−0.57) and 1.37.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#cb7-1" aria-hidden="true" tabindex="-1"></a>rlm.huber<span class="ot">&lt;-</span><span class="fu">rlm</span>(<span class="at">data =</span>shock.original,time<span class="sc">~</span> n.shocks, <span class="at">psi =</span> psi.huber,<span class="at">k2 =</span> <span class="fl">1.345</span>)</span>
+<span id="cb7-2"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#cb7-2" aria-hidden="true" tabindex="-1"></a>beta0.huber<span class="ot">&lt;-</span><span class="fu">unname</span>(rlm.huber<span class="sc">$</span>coefficients[<span class="fu">c</span>(<span class="st">&quot;(Intercept)&quot;</span>,<span class="st">&quot;n.shocks&quot;</span>)])[<span class="dv">1</span>]</span>
+<span id="cb7-3"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#cb7-3" aria-hidden="true" tabindex="-1"></a>beta1.huber<span class="ot">&lt;-</span><span class="fu">unname</span>(rlm.huber<span class="sc">$</span>coefficients[<span class="fu">c</span>(<span class="st">&quot;(Intercept)&quot;</span>,<span class="st">&quot;n.shocks&quot;</span>)])[<span class="dv">2</span>]</span>
+<span id="cb7-4"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rlm.huber)</span></code></pre></div>
+<pre><code>## 
+## Call: rlm(formula = time ~ n.shocks, data = shock.original, psi = psi.huber, 
+##     k2 = 1.345)
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.7141 -0.8899 -0.1843  0.9665  6.0983 
+## 
+## Coefficients:
+##             Value   Std. Error t value
+## (Intercept)  9.8174  0.8777    11.1860
+## n.shocks    -0.5719  0.0997    -5.7366
+## 
+## Residual standard error: 1.367 on 14 degrees of freedom</code></pre>
+<p>Draw another fitted line alongside with other estimators.
+<img src="index_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Sorrowfully, Huber estimates does not perform very well here. Despite also reflecting the downward trend, the fit shown above is also inaccurate, as it hovers between the outliers of the top left corner and the majority of the points.</p>
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>In residuals’ analysis, the result showed when using Huber estimators indeed proves a slight improvement rendered by recoginizing two outliers, entries equal to 1 and 3. But it still fails to recognize data entry with n.shocks equal to 0 as outlier, only to detect out the entry with the comparatively large residuals, hence is still heavily influenced by outliers.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#cb9-1" aria-hidden="true" tabindex="-1"></a>huber</span></code></pre></div>
+<pre><code>## function (y, k = 1.5, tol = 1e-06) 
+## {
+##     y &lt;- y[!is.na(y)]
+##     n &lt;- length(y)
+##     mu &lt;- median(y)
+##     s &lt;- mad(y)
+##     if (s == 0) 
+##         stop(&quot;cannot estimate scale: MAD is zero for this sample&quot;)
+##     repeat {
+##         yy &lt;- pmin(pmax(mu - k * s, y), mu + k * s)
+##         mu1 &lt;- sum(yy)/n
+##         if (abs(mu - mu1) &lt; tol * s) 
+##             break
+##         mu &lt;- mu1
+##     }
+##     list(mu = mu, s = s)
+## }
+## &lt;bytecode: 0x7fa36543d548&gt;
+## &lt;environment: namespace:MASS&gt;</code></pre>
+<pre><code>To argue for Huber M-estimators here, with larger amount of observations available, Huber M-estimators usually perform better. However, given that we only have 16 entries in shock, and at least 3 of the entries are outliers, Huber M-estimator, which penalizes relatively strongly large residuals using a linearly increasing penalty, still significantly adjusts for them, leading to somewhat of an inaccurate fit. </code></pre>
+</div>
+<div id="redescending-m-estimator-bisquare-estimator" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Redescending M-estimator: Bisquare Estimator<a href="classical-robust-regression-introduction-to-the-m-estimation.html#redescending-m-estimator-bisquare-estimator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Similarly, we also plot the corresponding <span class="math inline">\(\psi\)</span>, <span class="math inline">\(\rho\)</span>, <span class="math inline">\(w\)</span> functions for Bisquare Estimators in the same figure.</p>
+<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>When applying Bisquare M-estimator on the data set <strong><em>shock</em></strong>, we use <span class="math inline">\(k=1.548\)</span>. Similarly by solving <a href="classical-robust-regression-introduction-to-the-m-estimation.html#eq:M-def">(3.6)</a> with the corresponding functions changed, we obtain the estimated value for <span class="math inline">\(\hat{\boldsymbol\beta}_{Bisquare}\)</span> and <span class="math inline">\(\hat\sigma_{Bisquare}\)</span> to be approximately (7.92, −0.41) and 0.53.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#fit the model using Bisquare M-estimator, get the new estimates for the beta</span></span>
+<span id="cb12-2"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#cb12-2" aria-hidden="true" tabindex="-1"></a>rlm.bi<span class="ot">&lt;-</span><span class="fu">rlm</span>(<span class="at">data=</span>shock, time<span class="sc">~</span> n.shocks, <span class="at">psi =</span> psi.bisquare)</span>
+<span id="cb12-3"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#cb12-3" aria-hidden="true" tabindex="-1"></a>beta0.bi<span class="ot">&lt;-</span><span class="fu">unname</span>(rlm.bi<span class="sc">$</span>coefficients[<span class="fu">c</span>(<span class="st">&quot;(Intercept)&quot;</span>,<span class="st">&quot;n.shocks&quot;</span>)])[<span class="dv">1</span>]</span>
+<span id="cb12-4"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#cb12-4" aria-hidden="true" tabindex="-1"></a>beta1.bi<span class="ot">&lt;-</span><span class="fu">unname</span>(rlm.bi<span class="sc">$</span>coefficients[<span class="fu">c</span>(<span class="st">&quot;(Intercept)&quot;</span>,<span class="st">&quot;n.shocks&quot;</span>)])[<span class="dv">2</span>]</span>
+<span id="cb12-5"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rlm.bi)</span></code></pre></div>
+<pre><code>## 
+## Call: rlm(formula = time ~ n.shocks, data = shock, psi = psi.bisquare)
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.9204 -0.1915  0.2139  1.5889  7.5247 
+## 
+## Coefficients:
+##             Value    Std. Error t value 
+## (Intercept)   7.9164   0.3202    24.7219
+## n.shocks     -0.4137   0.0364   -11.3738
+## 
+## Residual standard error: 0.5289 on 14 degrees of freedom</code></pre>
+<p>The Bisquare M-estimator fit is shown below, alongside other estimators discussed before:
+<img src="index_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>The Bisquare M-estimator provides a relatively accurate fit, giving the same, if not better, level of accuracy as the normal linear regression fit with the outliers removed.</p>
+<p>As it is shown in the standardized residuals plot for Bisquare M-estimator, according to the Bisquare M-estimator and the three sigma rule mentioned in <a href="Classical-Linear-Regression.html#Experi">the very first experiment</a>, there are 5 data points that are flagged as potential outliers, namely data entry with equal to <span class="math inline">\(0, 1, 3, 7\)</span>, and 14.
+Although the estimator is likely correct in identifying data entries with equal to <span class="math inline">\(0,1\)</span>, and 3 as outliers, the other two flagged data entries, despite having a large standardized residual, are likely the result of variance of the data and should not be flagged as outliers. Thus, although Bisquare M-estimator provides a very good fit for the majority of the data set, it runs the potential risk of under-penalization, which may lead to discrimination against good data entries and flagging these good data entries as outliers.</p>
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="index_files/figure-html/unnamed-chunk-22-1.png" width="672" /><img src="index_files/figure-html/unnamed-chunk-22-2.png" width="672" /><img src="index_files/figure-html/unnamed-chunk-22-3.png" width="672" /></p>
+<p>Both the least-squares and Huber objective functions increase without bound as the residual <span class="math inline">\(r_i\)</span> departs from 0, but the least-squares objective function increases more rapidly. In contrast, the bisquare objective function levels eventually levels off (for <span class="math inline">\(|r_i| \neqslant k\)</span>). Least-squares assigns equal weight to each observation; the weights for the Huber estimator decline when |t| &gt; k; and the weights for the bisquare decline as soon as e departs from 0, and are 0 for |t| &gt; k.</p>
+<p>Refering to the textbook, the advantages and disadvantages of Monotone and Redescending M-estimators could summarized as follows:</p>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="53%" />
+<col width="23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Scenarios</th>
+<th align="center">Monotone</th>
+<th align="center">Redescending</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Solution to the estimating Equations</td>
+<td align="center">All solutions of <span class="math inline">\(\psi\)</span>-equation are solutions of <span class="math inline">\(\rho\)</span>-equation. If <span class="math inline">\(\psi\)</span> is increasing then the solution is unique.</td>
+<td align="center">The estimating equation may have “bad” roots.</td>
+</tr>
+<tr class="even">
+<td align="center">Trade-off between robustness and efficiency</td>
+<td align="center">worser</td>
+<td align="center">better</td>
+</tr>
+<tr class="odd">
+<td align="center">Starting Point</td>
+<td align="center">Does not require one</td>
+<td align="center">Requires one( mainly use monotone to begin)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="revisit-to-the-ols-and-comparison" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Revisit to the OLS and Comparison<a href="classical-robust-regression-introduction-to-the-m-estimation.html#revisit-to-the-ols-and-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now let us revisit the <span class="math inline">\({OLS}\)</span> estimate, a special type of M-estimation as we proved before, and try to compare with other M-estimators to reveal the reasons why why OLS estimates badly distorted in the presence of outliers— maybe even might inspire users to design and create more robust method based on our exploration. To have a clearer view of each estimator, we could summarize the respective <span class="math inline">\(\rho\)</span>-function, <span class="math inline">\(\psi\)</span>-function, and weight function <span class="math inline">\(w\)</span> as follows:</p>
+<table>
+<colgroup>
+<col width="18%" />
+<col width="27%" />
+<col width="18%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Estimator</th>
+<th align="center"><span class="math inline">\(\rho(t)\)</span></th>
+<th align="center"><span class="math inline">\(\psi(t)\)</span></th>
+<th align="center"><span class="math inline">\(w(t)\)</span></th>
+<th align="center">Range of <span class="math inline">\(t\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\mathit{OLS}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{1}{2}t^2\)</span></td>
+<td align="center"><span class="math inline">\(t\)</span></td>
+<td align="center"><span class="math inline">\(1\)</span></td>
+<td align="center"><span class="math inline">\(|t|&lt; \infty\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\mathit{LAR}\)</span></td>
+<td align="center"><span class="math inline">\(|t|\)</span></td>
+<td align="center"><span class="math inline">\(sgn(t)\)</span></td>
+<td align="center"><span class="math inline">\(\frac{sgn(t)}{t}\)</span></td>
+<td align="center"><span class="math inline">\(|t|&lt; \infty\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\mathit{Huber}\)</span></td>
+<td align="center"><span class="math inline">\(\begin{cases}\frac{1}{2}t^2 \\ k|t|-\frac{1}{2}k^2 \end{cases}\)</span></td>
+<td align="center"><span class="math inline">\(\begin{cases} t \\ k\,sgn(t) \end{cases}\)</span></td>
+<td align="center"><span class="math inline">\(\begin{cases} 1 \\ \frac{k}{{t}} \end{cases}\)</span></td>
+<td align="center"><span class="math inline">\(|t| \leqslant k \\ |t| &gt; k\)</span></td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\mathit{Bisquare}\)</span></td>
+<td align="center"><span class="math inline">\(\begin{cases}\frac{B^2}{6}\{1 -[1 - (t/B)^2 ]\} \\ \frac{B^2}{6} \end{cases}\)</span></td>
+<td align="center"><span class="math inline">\(\begin{cases} t[1-(t/B)^2]^2 \\ 0 \end{cases}\)</span></td>
+<td align="center"><span class="math inline">\(\begin{cases} t[1-(t/B)^2]^2 \\ 0 \end{cases}\)</span></td>
+<td align="center"><span class="math inline">\(|t| \leqslant B \\ |t| &gt; B\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>When comparing the objective functions, both the OLS and Huber objective functions increase without bound as the residual <span class="math inline">\(r_i\)</span> departs from 0, but the OLS objective function increases more rapidly. In contrast, the Bisquare objective function levels eventually levels off (for <span class="math inline">\(|t| \geq k\)</span>). As for weight functions, we see that OLS assigns equal weight to each observation in <a href="classical-robust-regression-introduction-to-the-m-estimation.html#tab:ols-tab">3.1</a>; while in the Huber M-estimators’ table <a href="classical-robust-regression-introduction-to-the-m-estimation.html#tab:huber-tab">3.2</a>, the weights for the Huber estimator decline when |t| &gt; k; and the weights for the Bisquare decline as soon as e departs from 0, and are 0 for |t| &gt; B in Bisquare M-estimators’ table <a href="classical-robust-regression-introduction-to-the-m-estimation.html#tab:bisq-tab">3.3</a>. Particularly in this document, we could clearly see this in</p>
+<table>
+<caption><span id="tab:ols-tab">Table 3.1: </span>OLS estimators Table (Standardized Residuals in Descending Order)</caption>
+<thead>
+<tr class="header">
+<th align="right">n.shocks</th>
+<th align="right">time</th>
+<th align="right">residuals</th>
+<th align="right">ols.standardized.residuals</th>
+<th align="right">weights</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">11.4</td>
+<td align="right">0.9154412</td>
+<td align="right">0.4055899</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">11.9</td>
+<td align="right">2.0283824</td>
+<td align="right">0.8986829</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">7.1</td>
+<td align="right">-2.1586765</td>
+<td align="right">-0.9564102</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">14.2</td>
+<td align="right">5.5542647</td>
+<td align="right">2.4608391</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">5.9</td>
+<td align="right">-2.1327941</td>
+<td align="right">-0.9449429</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">6.1</td>
+<td align="right">-1.3198529</td>
+<td align="right">-0.5847661</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">5.4</td>
+<td align="right">-1.4069118</td>
+<td align="right">-0.6233379</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">3.1</td>
+<td align="right">-3.0939706</td>
+<td align="right">-1.3707960</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">5.7</td>
+<td align="right">0.1189706</td>
+<td align="right">0.0527104</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">4.4</td>
+<td align="right">-0.5680882</td>
+<td align="right">-0.2516938</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">10</td>
+<td align="right">4.0</td>
+<td align="right">-0.3551471</td>
+<td align="right">-0.1573493</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">11</td>
+<td align="right">2.8</td>
+<td align="right">-0.9422059</td>
+<td align="right">-0.4174481</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">12</td>
+<td align="right">2.6</td>
+<td align="right">-0.5292647</td>
+<td align="right">-0.2344928</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">13</td>
+<td align="right">2.4</td>
+<td align="right">-0.1163235</td>
+<td align="right">-0.0515376</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="right">14</td>
+<td align="right">5.2</td>
+<td align="right">3.2966176</td>
+<td align="right">1.4605796</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">15</td>
+<td align="right">2.0</td>
+<td align="right">0.7095588</td>
+<td align="right">0.3143729</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p>see table <a href="classical-robust-regression-introduction-to-the-m-estimation.html#tab:huber-tab">3.2</a></p>
+<table style="width:100%;">
+<caption><span id="tab:huber-tab">Table 3.2: </span>Huber M-estimators Table (Standardized Residuals in Descending Order)</caption>
+<colgroup>
+<col width="11%" />
+<col width="6%" />
+<col width="19%" />
+<col width="35%" />
+<col width="9%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">n.shocks</th>
+<th align="right">time</th>
+<th align="right">huber.residuals</th>
+<th align="right">huber.standardized.residuals</th>
+<th align="left">class</th>
+<th align="right">huber.weights</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">14.2</td>
+<td align="right">7.5247165</td>
+<td align="right">5.5040536</td>
+<td align="left">outlier</td>
+<td align="right">0.3015350</td>
+</tr>
+<tr class="even">
+<td align="right">14</td>
+<td align="right">5.2</td>
+<td align="right">3.0755980</td>
+<td align="right">2.2496869</td>
+<td align="left">bulk</td>
+<td align="right">0.5425355</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">3.1</td>
+<td align="right">-1.9204175</td>
+<td align="right">-1.4047148</td>
+<td align="left">bulk</td>
+<td align="right">0.6774573</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">11.9</td>
+<td align="right">4.3972835</td>
+<td align="right">3.2164513</td>
+<td align="left">outlier</td>
+<td align="right">0.6927772</td>
+</tr>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">11.4</td>
+<td align="right">3.4835670</td>
+<td align="right">2.5481013</td>
+<td align="left">bulk</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">7.1</td>
+<td align="right">0.0110000</td>
+<td align="right">0.0080461</td>
+<td align="left">bulk</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">5.9</td>
+<td align="right">-0.3615670</td>
+<td align="right">-0.2644730</td>
+<td align="left">bulk</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">6.1</td>
+<td align="right">0.2521495</td>
+<td align="right">0.1844381</td>
+<td align="left">bulk</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">5.4</td>
+<td align="right">-0.0341340</td>
+<td align="right">-0.0249678</td>
+<td align="left">bulk</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">5.7</td>
+<td align="right">1.0932990</td>
+<td align="right">0.7997080</td>
+<td align="left">bulk</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="right">4.4</td>
+<td align="right">0.2070155</td>
+<td align="right">0.1514242</td>
+<td align="left">bulk</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="right">4.0</td>
+<td align="right">0.2207320</td>
+<td align="right">0.1614573</td>
+<td align="left">bulk</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="right">11</td>
+<td align="right">2.8</td>
+<td align="right">-0.5655515</td>
+<td align="right">-0.4136801</td>
+<td align="left">bulk</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="right">12</td>
+<td align="right">2.6</td>
+<td align="right">-0.3518350</td>
+<td align="right">-0.2573544</td>
+<td align="left">bulk</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="odd">
+<td align="right">13</td>
+<td align="right">2.4</td>
+<td align="right">-0.1381185</td>
+<td align="right">-0.1010286</td>
+<td align="left">bulk</td>
+<td align="right">1.0000000</td>
+</tr>
+<tr class="even">
+<td align="right">15</td>
+<td align="right">2.0</td>
+<td align="right">0.2893145</td>
+<td align="right">0.2116229</td>
+<td align="left">bulk</td>
+<td align="right">1.0000000</td>
+</tr>
+</tbody>
+</table>
+<p>We can roughly see that in Huber’s table, as the absolute residual goes up, the weight goes down. In other words, data points with a larger residual tend to be down-weighted MORE, which we commonly call this phenomenon as penalization. While when suspicious data points with large residual, however, could not be recognized as outliers due to harsh objective function, it could be called as over penalization, or at lease very harsh objective function. That for sure is not what we desire, since we need an accurate estimate for regression coefficients and scale, which is almost needed in conducting any any statistical inference.</p>
+<p>While in OLS regression, all cases have a weight of 1, hence the more points in a robust regression that have a weight close to one, the closer the results of the OLS and robust regressions. Both as showed before penalize large residuals comparatively too harsh and hinder any statistical analysis like outlier detection and prediction.So closeness for sure is not what we desire, since it implicitly conveys that it will lead to much improvement in the presence of outliers, just as in our case Huber only renders a diminutive improvement.</p>
+<p>Sadly in this document, the Huber estimation behaves actually quite similar to OLS, which could not be regarded as an ideal robust method. Since what users should expect is that the results are very different, since the large differences always suggest that the model parameters are being highly influenced by outliers, and hence users should most likely use the results from the robust regression.</p>
+<p>In other words, both Huber and OLS penalizes the large residuals too harsh and fails to differentiate some outliers from the general trend. Namely, change made from quadratic to linear by Huber M-estimator in the tail part is still, in a way, too influential.</p>
+<p>Next, let’s pay more attention to the performance of the other robust method, Bisquare estimation. Again, we can look at the weights. We can see when using the bisquare weighting function, the data points with entries equal to 0, 1, 3, 14 are dramatically lower than using the Huber weighting function. Not surprisingly, the 3 suspicious points, which are subjectively removed by us at the very beginning, are directly down weighted to zero. How fabulous is the the Bisquare esimation method!</p>
+<table>
+<caption><span id="tab:bisq-tab">Table 3.3: </span>Bsiquare M-estimators Table (Standardized Residuals in Descending Order)</caption>
+<colgroup>
+<col width="12%" />
+<col width="6%" />
+<col width="18%" />
+<col width="36%" />
+<col width="11%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">n.shocks</th>
+<th align="right">time</th>
+<th align="right">bi.residuals</th>
+<th align="right">bi.standardized.residuals</th>
+<th align="left">class</th>
+<th align="right">bi.weights</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">11.4</td>
+<td align="right">3.4835670</td>
+<td align="right">6.5860809</td>
+<td align="left">outlier</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">11.9</td>
+<td align="right">4.3972835</td>
+<td align="right">8.3135663</td>
+<td align="left">outlier</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">14.2</td>
+<td align="right">7.5247165</td>
+<td align="right">14.2263352</td>
+<td align="left">outlier</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="even">
+<td align="right">14</td>
+<td align="right">5.2</td>
+<td align="right">3.0755980</td>
+<td align="right">5.8147690</td>
+<td align="left">outlier</td>
+<td align="right">0.0000000</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">3.1</td>
+<td align="right">-1.9204175</td>
+<td align="right">-3.6307684</td>
+<td align="left">outlier</td>
+<td align="right">0.1594929</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">5.7</td>
+<td align="right">1.0932990</td>
+<td align="right">2.0670065</td>
+<td align="left">bulk</td>
+<td align="right">0.6486165</td>
+</tr>
+<tr class="odd">
+<td align="right">11</td>
+<td align="right">2.8</td>
+<td align="right">-0.5655515</td>
+<td align="right">-1.0692396</td>
+<td align="left">bulk</td>
+<td align="right">0.8985277</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">5.9</td>
+<td align="right">-0.3615670</td>
+<td align="right">-0.6835837</td>
+<td align="left">bulk</td>
+<td align="right">0.9578510</td>
+</tr>
+<tr class="odd">
+<td align="right">12</td>
+<td align="right">2.6</td>
+<td align="right">-0.3518350</td>
+<td align="right">-0.6651842</td>
+<td align="left">bulk</td>
+<td align="right">0.9600840</td>
+</tr>
+<tr class="even">
+<td align="right">15</td>
+<td align="right">2.0</td>
+<td align="right">0.2893145</td>
+<td align="right">0.5469821</td>
+<td align="left">bulk</td>
+<td align="right">0.9729223</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">6.1</td>
+<td align="right">0.2521495</td>
+<td align="right">0.4767174</td>
+<td align="left">bulk</td>
+<td align="right">0.9794143</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="right">4.0</td>
+<td align="right">0.2207320</td>
+<td align="right">0.4173190</td>
+<td align="left">bulk</td>
+<td align="right">0.9841999</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="right">4.4</td>
+<td align="right">0.2070155</td>
+<td align="right">0.3913864</td>
+<td align="left">bulk</td>
+<td align="right">0.9860976</td>
+</tr>
+<tr class="even">
+<td align="right">13</td>
+<td align="right">2.4</td>
+<td align="right">-0.1381185</td>
+<td align="right">-0.2611288</td>
+<td align="left">bulk</td>
+<td align="right">0.9937954</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">5.4</td>
+<td align="right">-0.0341340</td>
+<td align="right">-0.0645342</td>
+<td align="left">bulk</td>
+<td align="right">0.9996187</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">7.1</td>
+<td align="right">0.0110000</td>
+<td align="right">0.0207968</td>
+<td align="left">bulk</td>
+<td align="right">0.9999615</td>
+</tr>
+</tbody>
+</table>
+<p>All in all, different functions have advantages and drawbacks. Huber weights can have difficulties with severe outliers, and bisquare weights can have difficulties converging or may yield multiple solutions. In this <a href="classical-robust-regression-introduction-to-the-m-estimation.html#DefM">Definitions section</a>, we introduced the framework of the M-estimators and discussed two examples of M-estimators in Huber M-estimator and Bisquare M-estimator. In the next chapter, we propose another M-estimator, which provides a more strict penalization than the constant valued penalization of the Bisquare M-estimator, but a less harsh penalization than that of the linear penalization of Huber M-estimator. To give a more complete introduction to some modified techniques emerging in recent years, particularly the fabulous work done by Professor Gagnon, we might end the general Robust Regression Section{#3} here, and let’s move to next chapter.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="5">
+<li id="fn5"><p>Since the objective function for L1 is actually L-1 norm.<a href="classical-robust-regression-introduction-to-the-m-estimation.html#fnref5" class="footnote-back">↩︎</a></p></li>
+<li id="fn6"><p>Unfortunately, high-leverage observations can cause the LAR estimator to break down. It may still be convenient, however, to use <span class="math inline">\(\mathtt{LAR}\)</span> estimates as starting values for other, more robust regression procedures.<a href="classical-robust-regression-introduction-to-the-m-estimation.html#fnref6" class="footnote-back">↩︎</a></p></li>
+<li id="fn7"><p>Another huge topic need to be filled with<a href="classical-robust-regression-introduction-to-the-m-estimation.html#fnref7" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="Classical-Linear-Regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modern-robust-m-estimators-as-heavy-tailed-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/williamsDlin/RobStat.gitindex.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

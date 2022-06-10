@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Preface | Robust Statistics</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="generator" content="bookdown 0.26.3 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Preface | Robust Statistics" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://github.com/williamsDlin/RobStat.git/path to the social sharing image like images/cover.jpg" />
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="github-repo" content="williamsDlin/RobStat" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Preface | Robust Statistics" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+set in the _output.yml file.
+The HTML output format for this example is bookdown::gitbook,</p>" />
+  <meta name="twitter:image" content="https://github.com/williamsDlin/RobStat.git/path to the social sharing image like images/cover.jpg" />
+
+<meta name="author" content=" Williams D Lin, Peter Wu, Phillipe Gagnon" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="intro.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#General-Model"><i class="fa fa-check"></i><b>0.1</b> General Model</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#classical-assumptions-about-random-errors"><i class="fa fa-check"></i><b>0.2</b> Classical Assumptions about Random Errors</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>0.3</b> Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="0.4" data-path="index.html"><a href="index.html#ordinary-least-squares-estimation"><i class="fa fa-check"></i><b>0.4</b> Ordinary Least Squares Estimation</a></li>
+<li class="chapter" data-level="0.5" data-path="index.html"><a href="index.html#Experi"><i class="fa fa-check"></i><b>0.5</b> Experiments using Classical Linear Regression Methods</a></li>
+<li class="chapter" data-level="0.6" data-path="index.html"><a href="index.html#n.shocks-time-residuals-standardized.residuals-type"><i class="fa fa-check"></i><b>0.6</b> n.shocks time residuals standardized.residuals type</a></li>
+<li class="chapter" data-level="0.7" data-path="index.html"><a href="index.html#original-ols"><i class="fa fa-check"></i><b>0.7</b> 4 3 14.2 5.554265 2.460839 original OLS</a></li>
+<li class="chapter" data-level="0.8" data-path="index.html"><a href="index.html#updated-ols"><i class="fa fa-check"></i><b>0.8</b> 1 3 14.2 7.944199 7.248111 updated OLS</a></li>
+<li class="chapter" data-level="0.9" data-path="index.html"><a href="index.html#motivation"><i class="fa fa-check"></i><b>0.9</b> Motivation</a></li>
+<li class="chapter" data-level="0.10" data-path="index.html"><a href="index.html#DefM"><i class="fa fa-check"></i><b>0.10</b> Definitions and Examples in the M-estimation</a>
+<ul>
+<li class="chapter" data-level="0.10.1" data-path="index.html"><a href="index.html#origin-and-initial-definition-of-m-estimators"><i class="fa fa-check"></i><b>0.10.1</b> Origin and Initial Definition of M-estimators</a></li>
+<li class="chapter" data-level="0.10.2" data-path="index.html"><a href="index.html#examples-and-the-ultimate-definition-of-the-m-estimators"><i class="fa fa-check"></i><b>0.10.2</b> Examples and the Ultimate Definition of the M-estimators</a></li>
+</ul></li>
+<li class="chapter" data-level="0.11" data-path="index.html"><a href="index.html#compute"><i class="fa fa-check"></i><b>0.11</b> Theoretical Foudation of the Computing</a>
+<ul>
+<li class="chapter" data-level="0.11.1" data-path="index.html"><a href="index.html#general-philosophy-iterate-and-reweight"><i class="fa fa-check"></i><b>0.11.1</b> General Philosophy: Iterate and Reweight !</a></li>
+<li class="chapter" data-level="0.11.2" data-path="index.html"><a href="index.html#estimate-sigma-beforehand"><i class="fa fa-check"></i><b>0.11.2</b> Estimate <span class="math inline">\(\sigma\)</span> beforehand</a></li>
+<li class="chapter" data-level="0.11.3" data-path="index.html"><a href="index.html#estimate-coefficients-beta-and-scale-sigma-simultaneously"><i class="fa fa-check"></i><b>0.11.3</b> Estimate Coefficients <span class="math inline">\(\beta\)</span> and Scale <span class="math inline">\(\sigma\)</span> Simultaneously</a></li>
+</ul></li>
+<li class="chapter" data-level="0.12" data-path="index.html"><a href="index.html#robust-regression-experiment"><i class="fa fa-check"></i><b>0.12</b> Robust Regression Experiment</a>
+<ul>
+<li class="chapter" data-level="0.12.1" data-path="index.html"><a href="index.html#monotone-m-estimator-huber-estimator"><i class="fa fa-check"></i><b>0.12.1</b> Monotone M-estimator: Huber Estimator</a></li>
+</ul></li>
+<li class="chapter" data-level="0.13" data-path="index.html"><a href="index.html#section"><i class="fa fa-check"></i><b>0.13</b> </a></li>
+<li class="chapter" data-level="0.14" data-path="index.html"><a href="index.html#call-rlmformula-time-n.shocks-data-shock.original-psi-psi.huber"><i class="fa fa-check"></i><b>0.14</b> Call: rlm(formula = time ~ n.shocks, data = shock.original, psi = psi.huber,</a></li>
+<li class="chapter" data-level="0.15" data-path="index.html"><a href="index.html#k2-1.345"><i class="fa fa-check"></i><b>0.15</b> k2 = 1.345)</a></li>
+<li class="chapter" data-level="0.16" data-path="index.html"><a href="index.html#residuals"><i class="fa fa-check"></i><b>0.16</b> Residuals:</a></li>
+<li class="chapter" data-level="0.17" data-path="index.html"><a href="index.html#min-1q-median-3q-max"><i class="fa fa-check"></i><b>0.17</b> Min 1Q Median 3Q Max</a></li>
+<li class="chapter" data-level="0.18" data-path="index.html"><a href="index.html#section-1"><i class="fa fa-check"></i><b>0.18</b> -2.7141 -0.8899 -0.1843 0.9665 6.0983</a></li>
+<li class="chapter" data-level="0.19" data-path="index.html"><a href="index.html#section-2"><i class="fa fa-check"></i><b>0.19</b> </a></li>
+<li class="chapter" data-level="0.20" data-path="index.html"><a href="index.html#coefficients"><i class="fa fa-check"></i><b>0.20</b> Coefficients:</a></li>
+<li class="chapter" data-level="0.21" data-path="index.html"><a href="index.html#value-std.-error-t-value"><i class="fa fa-check"></i><b>0.21</b> Value Std. Error t value</a></li>
+<li class="chapter" data-level="0.22" data-path="index.html"><a href="index.html#intercept-9.8174-0.8777-11.1860"><i class="fa fa-check"></i><b>0.22</b> (Intercept) 9.8174 0.8777 11.1860</a></li>
+<li class="chapter" data-level="0.23" data-path="index.html"><a href="index.html#n.shocks--0.5719-0.0997--5.7366"><i class="fa fa-check"></i><b>0.23</b> n.shocks -0.5719 0.0997 -5.7366</a></li>
+<li class="chapter" data-level="0.24" data-path="index.html"><a href="index.html#section-3"><i class="fa fa-check"></i><b>0.24</b> </a></li>
+<li class="chapter" data-level="0.25" data-path="index.html"><a href="index.html#residual-standard-error-1.367-on-14-degrees-of-freedom"><i class="fa fa-check"></i><b>0.25</b> Residual standard error: 1.367 on 14 degrees of freedom</a>
+<ul>
+<li class="chapter" data-level="0.25.1" data-path="index.html"><a href="index.html#redescending-m-estimator-bisquare-estimator"><i class="fa fa-check"></i><b>0.25.1</b> Redescending M-estimator: Bisquare Estimator</a></li>
+</ul></li>
+<li class="chapter" data-level="0.26" data-path="index.html"><a href="index.html#section-4"><i class="fa fa-check"></i><b>0.26</b> </a></li>
+<li class="chapter" data-level="0.27" data-path="index.html"><a href="index.html#call-rlmformula-time-n.shocks-data-shock-psi-psi.bisquare"><i class="fa fa-check"></i><b>0.27</b> Call: rlm(formula = time ~ n.shocks, data = shock, psi = psi.bisquare)</a></li>
+<li class="chapter" data-level="0.28" data-path="index.html"><a href="index.html#residuals-1"><i class="fa fa-check"></i><b>0.28</b> Residuals:</a></li>
+<li class="chapter" data-level="0.29" data-path="index.html"><a href="index.html#min-1q-median-3q-max-1"><i class="fa fa-check"></i><b>0.29</b> Min 1Q Median 3Q Max</a></li>
+<li class="chapter" data-level="0.30" data-path="index.html"><a href="index.html#section-5"><i class="fa fa-check"></i><b>0.30</b> -1.9204 -0.1915 0.2139 1.5889 7.5247</a></li>
+<li class="chapter" data-level="0.31" data-path="index.html"><a href="index.html#section-6"><i class="fa fa-check"></i><b>0.31</b> </a></li>
+<li class="chapter" data-level="0.32" data-path="index.html"><a href="index.html#coefficients-1"><i class="fa fa-check"></i><b>0.32</b> Coefficients:</a></li>
+<li class="chapter" data-level="0.33" data-path="index.html"><a href="index.html#value-std.-error-t-value-1"><i class="fa fa-check"></i><b>0.33</b> Value Std. Error t value</a></li>
+<li class="chapter" data-level="0.34" data-path="index.html"><a href="index.html#intercept-7.9164-0.3202-24.7219"><i class="fa fa-check"></i><b>0.34</b> (Intercept) 7.9164 0.3202 24.7219</a></li>
+<li class="chapter" data-level="0.35" data-path="index.html"><a href="index.html#n.shocks--0.4137-0.0364--11.3738"><i class="fa fa-check"></i><b>0.35</b> n.shocks -0.4137 0.0364 -11.3738</a></li>
+<li class="chapter" data-level="0.36" data-path="index.html"><a href="index.html#section-7"><i class="fa fa-check"></i><b>0.36</b> </a></li>
+<li class="chapter" data-level="0.37" data-path="index.html"><a href="index.html#residual-standard-error-0.5289-on-14-degrees-of-freedom"><i class="fa fa-check"></i><b>0.37</b> Residual standard error: 0.5289 on 14 degrees of freedom</a>
+<ul>
+<li class="chapter" data-level="0.37.1" data-path="index.html"><a href="index.html#revisit-to-the-ols-and-comparison"><i class="fa fa-check"></i><b>0.37.1</b> Revisit to the OLS and Comparison</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="preface-1.html"><a href="preface-1.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html"><i class="fa fa-check"></i><b>2</b> Classical Linear Regression</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="index.html"><a href="index.html#General-Model"><i class="fa fa-check"></i><b>2.1</b> General Model</a></li>
+<li class="chapter" data-level="2.2" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#classical-assumptions-about-random-errors-1"><i class="fa fa-check"></i><b>2.2</b> Classical Assumptions about Random Errors</a></li>
+<li class="chapter" data-level="2.3" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#maximum-likelihood-estimation-1"><i class="fa fa-check"></i><b>2.3</b> Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="2.4" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#ordinary-least-squares-estimation-1"><i class="fa fa-check"></i><b>2.4</b> Ordinary Least Squares Estimation</a></li>
+<li class="chapter" data-level="2.5" data-path="index.html"><a href="index.html#Experi"><i class="fa fa-check"></i><b>2.5</b> Experiments using Classical Linear Regression Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html"><i class="fa fa-check"></i><b>3</b> Classical Robust Regression: introduction to the M-estimation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#motivation-1"><i class="fa fa-check"></i><b>3.1</b> Motivation</a></li>
+<li class="chapter" data-level="3.2" data-path="index.html"><a href="index.html#DefM"><i class="fa fa-check"></i><b>3.2</b> Definitions and Examples in the M-estimation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#origin-and-initial-definition-of-m-estimators-1"><i class="fa fa-check"></i><b>3.2.1</b> Origin and Initial Definition of M-estimators</a></li>
+<li class="chapter" data-level="3.2.2" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#examples-and-the-ultimate-definition-of-the-m-estimators-1"><i class="fa fa-check"></i><b>3.2.2</b> Examples and the Ultimate Definition of the M-estimators</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="index.html"><a href="index.html#compute"><i class="fa fa-check"></i><b>3.3</b> Theoretical Foudation of the Computing</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#general-philosophy-iterate-and-reweight-1"><i class="fa fa-check"></i><b>3.3.1</b> General Philosophy: Iterate and Reweight !</a></li>
+<li class="chapter" data-level="3.3.2" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#estimate-sigma-beforehand-1"><i class="fa fa-check"></i><b>3.3.2</b> Estimate <span class="math inline">\(\sigma\)</span> beforehand</a></li>
+<li class="chapter" data-level="3.3.3" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#estimate-coefficients-beta-and-scale-sigma-simultaneously-1"><i class="fa fa-check"></i><b>3.3.3</b> Estimate Coefficients <span class="math inline">\(\beta\)</span> and Scale <span class="math inline">\(\sigma\)</span> Simultaneously</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#robust-regression-experiment-1"><i class="fa fa-check"></i><b>3.4</b> Robust Regression Experiment</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#monotone-m-estimator-huber-estimator-1"><i class="fa fa-check"></i><b>3.4.1</b> Monotone M-estimator: Huber Estimator</a></li>
+<li class="chapter" data-level="3.4.2" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#redescending-m-estimator-bisquare-estimator-1"><i class="fa fa-check"></i><b>3.4.2</b> Redescending M-estimator: Bisquare Estimator</a></li>
+<li class="chapter" data-level="3.4.3" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#revisit-to-the-ols-and-comparison-1"><i class="fa fa-check"></i><b>3.4.3</b> Revisit to the OLS and Comparison</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>4</b> Cross-references</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="cross.html"><a href="cross.html#chapters-and-sub-chapters"><i class="fa fa-check"></i><b>4.1</b> Chapters and sub-chapters</a></li>
+<li class="chapter" data-level="4.2" data-path="cross.html"><a href="cross.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>4.2</b> Captioned figures and tables</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="parts.html"><a href="parts.html"><i class="fa fa-check"></i><b>5</b> Parts</a></li>
+<li class="chapter" data-level="6" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>6</b> Footnotes and citations</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#footnotes"><i class="fa fa-check"></i><b>6.1</b> Footnotes</a></li>
+<li class="chapter" data-level="6.2" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#citations"><i class="fa fa-check"></i><b>6.2</b> Citations</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>7</b> Blocks</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>7.1</b> Equations</a></li>
+<li class="chapter" data-level="7.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>7.2</b> Theorems and proofs</a></li>
+<li class="chapter" data-level="7.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>7.3</b> Callout blocks</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>8</b> Sharing your book</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="sharing-your-book.html"><a href="sharing-your-book.html#publishing"><i class="fa fa-check"></i><b>8.1</b> Publishing</a></li>
+<li class="chapter" data-level="8.2" data-path="sharing-your-book.html"><a href="sharing-your-book.html#pages"><i class="fa fa-check"></i><b>8.2</b> 404 pages</a></li>
+<li class="chapter" data-level="8.3" data-path="sharing-your-book.html"><a href="sharing-your-book.html#metadata-for-sharing"><i class="fa fa-check"></i><b>8.3</b> Metadata for sharing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><span style="font-size:140%;font-family:Roboto;font-variant:small-caps;font-style:normal;font-color:#A52a2a">Robust Statistics</span></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="preface-1" class="section level1 unnumbered hasAnchor">
+<h1>Preface<a href="preface-1.html#preface-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>This summer I am so lucky and privileged to be able to be mentored by <a href="https://philippegagnonphd.github.io/website" title="Professor Gagno">Professor Gagnon</a> to study in the fields of Robust Statistics and Actuarial Science. Since personally I owed a lot to numerous excellent documents from all of these respectable scholars, who basically could not only give strict <code>Mathematical Proofs</code> but also supply with embedded <code>Reproducable Experiments</code><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, one of the core spirits that the <strong><em>R Markdown</em></strong> have been promoting all the time. I came to realize that I could share, if any, experiences learnt from such outstanding researchers and their documents, it could hopefully transform into my giving back to the whole statistics communities and actuarial science societies. For now, although some energy were devoted to learn how to set up and publish a short e-book, I am still quite an inexperienced user in web-related programming. Hoping to be able to facilitate my dear peers, and all of the extraoridanary researchers heading for the same better future, let’s start our journey~</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>I am sorry that some code are temporarily hided for aesthetic reasons, but I am trying to learn how to design a button to let readers decide to hide or expand.<a href="preface-1.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="intro.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

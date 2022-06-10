@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Classical Linear Regression | Robust Statistics Notes</title>
+  <meta name="description" content="Let us study together." />
+  <meta name="generator" content="bookdown 0.26.3 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Classical Linear Regression | Robust Statistics Notes" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="https://github.com/williamsDlin/RobStat.git/path to the social sharing image like images/cover.jpg" />
+  <meta property="og:description" content="Let us study together." />
+  <meta name="github-repo" content="williamsDlin/RobStat" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Classical Linear Regression | Robust Statistics Notes" />
+  
+  <meta name="twitter:description" content="Let us study together." />
+  <meta name="twitter:image" content="https://github.com/williamsDlin/RobStat.git/path to the social sharing image like images/cover.jpg" />
+
+<meta name="author" content=" Williams D Lin, Peter Wu, Phillipe Gagnon" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="classical-robust-regression-introduction-to-the-m-estimation.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Robust Statistic Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html"><i class="fa fa-check"></i><b>2</b> Classical Linear Regression</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#General-Model"><i class="fa fa-check"></i><b>2.1</b> General Model</a></li>
+<li class="chapter" data-level="2.2" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#classical-assumptions-about-random-errors"><i class="fa fa-check"></i><b>2.2</b> Classical Assumptions about Random Errors</a></li>
+<li class="chapter" data-level="2.3" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>2.3</b> Maximum Likelihood Estimation</a></li>
+<li class="chapter" data-level="2.4" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#ordinary-least-squares-estimation"><i class="fa fa-check"></i><b>2.4</b> Ordinary Least Squares Estimation</a></li>
+<li class="chapter" data-level="2.5" data-path="Classical-Linear-Regression.html"><a href="Classical-Linear-Regression.html#Experi"><i class="fa fa-check"></i><b>2.5</b> Experiments using Classical Linear Regression Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html"><i class="fa fa-check"></i><b>3</b> Classical Robust Regression: introduction to the M-estimation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#motivation"><i class="fa fa-check"></i><b>3.1</b> Motivation</a></li>
+<li class="chapter" data-level="3.2" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#DefM"><i class="fa fa-check"></i><b>3.2</b> Definitions and Examples in the M-estimation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#origin-and-initial-definition-of-m-estimators"><i class="fa fa-check"></i><b>3.2.1</b> Origin and Initial Definition of M-estimators</a></li>
+<li class="chapter" data-level="3.2.2" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#examples-and-the-ultimate-definition-of-the-m-estimators"><i class="fa fa-check"></i><b>3.2.2</b> Examples and the Ultimate Definition of the M-estimators</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#compute"><i class="fa fa-check"></i><b>3.3</b> Theoretical Foudation of the Computing</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#general-philosophy-iterate-and-reweight"><i class="fa fa-check"></i><b>3.3.1</b> General Philosophy: Iterate and Reweight !</a></li>
+<li class="chapter" data-level="3.3.2" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#estimate-sigma-beforehand"><i class="fa fa-check"></i><b>3.3.2</b> Estimate <span class="math inline">\(\sigma\)</span> beforehand</a></li>
+<li class="chapter" data-level="3.3.3" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#estimate-coefficients-beta-and-scale-sigma-simultaneously"><i class="fa fa-check"></i><b>3.3.3</b> Estimate Coefficients <span class="math inline">\(\beta\)</span> and Scale <span class="math inline">\(\sigma\)</span> Simultaneously</a></li>
+<li class="chapter" data-level="3.3.4" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#starting-value"><i class="fa fa-check"></i><b>3.3.4</b> Starting Value</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#robust-regression-experiment"><i class="fa fa-check"></i><b>3.4</b> Robust Regression Experiment</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#monotone-m-estimator-huber-estimator"><i class="fa fa-check"></i><b>3.4.1</b> Monotone M-estimator: Huber Estimator</a></li>
+<li class="chapter" data-level="3.4.2" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#redescending-m-estimator-bisquare-estimator"><i class="fa fa-check"></i><b>3.4.2</b> Redescending M-estimator: Bisquare Estimator</a></li>
+<li class="chapter" data-level="3.4.3" data-path="classical-robust-regression-introduction-to-the-m-estimation.html"><a href="classical-robust-regression-introduction-to-the-m-estimation.html#revisit-to-the-ols-and-comparison"><i class="fa fa-check"></i><b>3.4.3</b> Revisit to the OLS and Comparison</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="modern-robust-m-estimators-as-heavy-tailed-models.html"><a href="modern-robust-m-estimators-as-heavy-tailed-models.html"><i class="fa fa-check"></i><b>4</b> Modern Robust M-estimators as heavy-tailed models</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="modern-robust-m-estimators-as-heavy-tailed-models.html"><a href="modern-robust-m-estimators-as-heavy-tailed-models.html#introduction-to-lptn"><i class="fa fa-check"></i><b>4.1</b> Introduction to LPTN</a></li>
+<li class="chapter" data-level="4.2" data-path="modern-robust-m-estimators-as-heavy-tailed-models.html"><a href="modern-robust-m-estimators-as-heavy-tailed-models.html#robustness-when-using-lptn"><i class="fa fa-check"></i><b>4.2</b> Robustness when using LPTN</a></li>
+<li class="chapter" data-level="4.3" data-path="modern-robust-m-estimators-as-heavy-tailed-models.html"><a href="modern-robust-m-estimators-as-heavy-tailed-models.html#efficiency-of-the-lptn-model"><i class="fa fa-check"></i><b>4.3</b> Efficiency of the LPTN Model</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="other-robust-regression-methods.html"><a href="other-robust-regression-methods.html"><i class="fa fa-check"></i><b>5</b> Other Robust Regression Methods</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="other-robust-regression-methods.html"><a href="other-robust-regression-methods.html#mm"><i class="fa fa-check"></i><b>5.1</b> MM-estimator</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="reflection-on-work-ethics-interns-diary.html"><a href="reflection-on-work-ethics-interns-diary.html"><i class="fa fa-check"></i><b>6</b> Reflection on Work Ethics– Intern’s Diary</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="reflection-on-work-ethics-interns-diary.html"><a href="reflection-on-work-ethics-interns-diary.html#communiation-communication-communication"><i class="fa fa-check"></i><b>6.1</b> Communiation! Communication! Communication!</a></li>
+<li class="chapter" data-level="6.2" data-path="reflection-on-work-ethics-interns-diary.html"><a href="reflection-on-work-ethics-interns-diary.html#file-management"><i class="fa fa-check"></i><b>6.2</b> File management</a></li>
+<li class="chapter" data-level="6.3" data-path="reflection-on-work-ethics-interns-diary.html"><a href="reflection-on-work-ethics-interns-diary.html#it-is-your-life"><i class="fa fa-check"></i><b>6.3</b> It is your LIFE</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><span style="font-size:140%;font-family:Roboto;font-variant:small-caps;font-style:normal;font-color:#A52a2a">Robust Statistics Notes</span></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="Classical-Linear-Regression" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Classical Linear Regression<a href="Classical-Linear-Regression.html#Classical-Linear-Regression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In statistics, we aim to find pattern within data sets through fitting relevant models. A particular model that has proved to be useful is linear regression. In this section, we begin by describing this model in generalities and then proceed to explain how it can be estimated. This explanation of the general model will turn out to be useful to characterize robust and non-robust models.</p>
+<div id="General-Model" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> General Model<a href="Classical-Linear-Regression.html#General-Model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Consider that we are given a data set of the form <span class="math inline">\((\mathbf{x}_i, y_i)_{i = 1}^n\)</span> where <span class="math inline">\(\mathbf{x}_1 := (x_{11}, \ldots, x_{1p})^T, \ldots, \mathbf{x}_n := (x_{n1}, \ldots, x_{np})^T \in \mathbb{R}^p\)</span> are <span class="math inline">\(n\)</span> vectors with data points from <span class="math inline">\(p\)</span> covariates and <span class="math inline">\(y_1, \ldots, y_n\in\mathbb{R}\)</span> are <span class="math inline">\(n\)</span> observations of a dependent random variable, with <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span> being positive integers such that <span class="math inline">\(n &gt; p\)</span>. In this document, we consider that <span class="math inline">\(\mathbf{x}_1, \ldots, \mathbf{x}_n\)</span> are known vectors, not realizations of random variables, contrarily to <span class="math inline">\(y_1, \ldots, y_n.\)</span></p>
+<p>We consider that <span class="math inline">\(x_{11} = \ldots = x_{n1} = 1\)</span> to add an intercept to the model. In linear regression, we want to use the covariates to model the dependent variable and we assume that:</p>
+<p><span class="math display" id="eq:model">\[\begin{equation}
+y_i = \mathbf{x}_i^T \boldsymbol\beta + \epsilon_i,  \tag{2.1}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(\boldsymbol\beta := (\beta_1, \ldots, \beta_p)^T\)</span> is the vector of regression coefficients, and <span class="math inline">\(\epsilon_1, \ldots, \epsilon_n\)</span> are <span class="math inline">\(n\)</span> random errors that allow to explain the discrepancies between <span class="math inline">\(y_i\)</span> and <span class="math inline">\(\mathbf{x}_i^T \boldsymbol\beta\)</span>.</p>
+<p>While not especially important in itself, the idea below will play an important auxiliary role in the development of estimates for regression. Considering that the random error term <span class="math inline">\(\epsilon_i\)</span> satisfying the <strong><em>Mutiplicative Model</em></strong>:</p>
+<p><span class="math display" id="eq:scale">\[\begin{equation}
+\epsilon_i=\sigma\mathcal{u_i} \quad i=1,2,\ldots,n,  \tag{2.2}
+\end{equation}\]</span> where the <span class="math inline">\({u}_i\)</span> ’s are independent and identically distributed (IID) with density <span class="math inline">\(f\)</span> and <span class="math inline">\(\sigma\)</span> &gt; 0 is the unknown scale parameter. After simple steps of transforming random variables, the distributions of the <span class="math inline">\(\epsilon_i\)</span> ’s density will be <span class="math display" id="eq:eps">\[\begin{equation}
+\frac{1}{\sigma} f(\frac{\epsilon_i} {\sigma}),\,\sigma &gt;0.
+\tag{2.3}
+\end{equation}\]</span></p>
+<p>We can condense the model <a href="Classical-Linear-Regression.html#eq:model">(2.1)</a> by writing it in the matrix version as follows:</p>
+<span class="math display" id="eq:matrix-model">\[\begin{equation}
+\textbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol\epsilon, \tag{2.4}
+\end{equation}\]</span>
+<p>where <span class="math inline">\(\mathbf{y}\)</span> := <span class="math inline">\((y_1, \ldots, y_n)^T\)</span>, <span class="math inline">\(\mathbf{X}\)</span> is a <span class="math inline">\(n\)</span> <span class="math inline">\(\times\)</span> <span class="math inline">\(p\)</span> matrix with lines given by <span class="math inline">\(\mathbf{x}_1^T, \ldots, \mathbf{x}_n^T\)</span>, and <span class="math inline">\(\boldsymbol\epsilon\)</span> := <span class="math inline">\((\epsilon_1, \ldots, \epsilon_n)^T\)</span>. <a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+</div>
+<div id="classical-assumptions-about-random-errors" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Classical Assumptions about Random Errors<a href="Classical-Linear-Regression.html#classical-assumptions-about-random-errors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the <a href="Classical-Linear-Regression.html#Classical-Linear-Regression">last section</a>, we introduced the model in generalities. In statistics, the most widespread assumption we make about the distribution of the random errors <span class="math inline">\(\epsilon_i\)</span>s in the model introduced is, no doubt, that they are IID normal, with <span class="math inline">\(\epsilon_i \overset{\mathrm{iid}}{\sim} \mathcal{N(0,\sigma^2)}\)</span>. It could be translated into the matrix version as follows:</p>
+<ul>
+<li><span class="math inline">\(E(\epsilon|\mathbf{X})=0\)</span><br />
+<span class="math inline">\(\quad\)</span> Expected value of the error term is zero conditional on all values of the explanatory variable <span class="math inline">\(\mathbf{x}_i\)</span>.</li>
+<li><span class="math inline">\(Var(\epsilon|\mathbf{X})=\sigma^2\)</span><br />
+<span class="math inline">\(\quad\)</span> The error term has the same variance conditional on all values of the explanatory variable, namely Homoskedasticity.</li>
+<li><span class="math inline">\(\epsilon∼\mathcal{N}(0,\sigma^2)\)</span><br />
+<span class="math inline">\(\quad\)</span> The error term is independent of the explanatory variables and normally distributed, namely Normality.</li>
+</ul>
+<p>Note that when we assume the disturbance term <span class="math inline">\(\epsilon_i\)</span>s follow the identical normal distribution, we still use the same letter <span class="math inline">\(\sigma\)</span> to denote the root of the true identical variance. Actually, it is because we could paraphrase the assumptions about the error term <span class="math inline">\(\epsilon_i\)</span>s into the properties of random variable <span class="math inline">\(u_i\)</span>s as this:</p>
+<ul>
+<li><span class="math inline">\(u_i \overset{\mathrm{iid}}{\sim} \mathcal{N(0,1)}\)</span><br />
+<span class="math inline">\(\quad\)</span> <span class="math inline">\(u_i\)</span>’s are independent and identically distributed random variables, which follow the standard normal distribution.</li>
+</ul>
+<p>In the following section, we will walk through the implications of these assumptions in two main methods, Maximum Likelihood Estimation and Ordinary Least Squares.</p>
+</div>
+<div id="maximum-likelihood-estimation" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Maximum Likelihood Estimation<a href="Classical-Linear-Regression.html#maximum-likelihood-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A way to perform model fitting is to find the combination of parameter values which most likely explains the data observed. The maximum likelihood estimator is based on this idea: it is the combination of parameter values which maximize the likelihood function. The likelihood function serves as a measure of goodness of fit of a combination of parameter values, with respect to a given data set and model. In the wake of it, we will discuss how to obtain the likelihood function under the framework described in the last section.</p>
+<p>The likelihood function <span class="math inline">\(\mathcal{L}\)</span> is a function which takes in the parameters <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\sigma\)</span> as inputs and outputs the likelihood of observing <span class="math inline">\(\textbf{y}\)</span> given <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span>. From (1), we see that, given <span class="math inline">\(\boldsymbol\beta\)</span> and <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(y_i\)</span> follows from a transformation of <span class="math inline">\(\epsilon_i\)</span> after adding a location parameter of <span class="math inline">\(\mathbf{x}_i^T \boldsymbol\beta\)</span> (recall that the vectors <span class="math inline">\(\mathbf{x}_i\)</span> are considered known). Hence, the density of <span class="math inline">\(y_i\)</span> evaluated at <span class="math inline">\(y_i\)</span> is equal to</p>
+<span class="math display" id="eq:y-pdf">\[\begin{equation}
+\frac{1}{\sigma} f\left(\frac{y_i - \mathbf{x}_i^T \boldsymbol\beta}{\sigma}\right).
+\tag{2.5}
+\end{equation}\]</span>
+<p>In addition, since we assumed in our model that the errors <span class="math inline">\(\epsilon_i\)</span> are independent, <span class="math inline">\(y_i\)</span> are also independent as translating independent variables by a constant term yields independent variables. Therefore, given <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\sigma\)</span>, the likelihood of observing <span class="math inline">\(\textbf{y}\)</span> is the multiplication of the likelihood of observing each <span class="math inline">\(y_i\)</span> <a href="Classical-Linear-Regression.html#eq:y-pdf">(2.5)</a>.</p>
+<p>The likelihood function evaluated at <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\sigma\)</span> is thus given by</p>
+<span class="math display" id="eq:L">\[\begin{equation}
+\mathcal{L}(\boldsymbol{\beta},\sigma|\mathbf{y}):=\prod_{i=1}^{n}\frac{1}{\sigma}f( \frac{ y_i - \mathbf {x}^T_i \boldsymbol{\beta} } {\sigma})\,. \tag{2.6}
+\end{equation}\]</span>
+<p>Working directly with multiplication when maximizing can be quite challenging as it is hard to take derivative of multiplication over multiple variables to find the critical points (it is at the critical points that minimum and maximum values are achieved). In addition, the product of large amount of small density values can impair the precision of our calculation when using computers. To circumvent these difficulties, we usually take the <span class="math inline">\(\log\)</span> of the likelihood function. By taking the <span class="math inline">\(\log\)</span> of the likelihood function, we are able to transform maximizing multiplication to maximizing summation, which is much easier to work with. We define the log-likelihood function <span class="math inline">\(\ell\)</span> as</p>
+<span class="math display" id="eq:logL">\[\begin{equation}
+\ell(\boldsymbol{\beta},\sigma|\mathbf{y}):=log\,\mathcal{L}(\boldsymbol{\beta},\sigma|\mathbf{y}) = -\sum_{i=1}^n\left(log\,\sigma+\rho\left(\frac{ y_i - \mathbf {x}^T_i \boldsymbol{\beta} } {\sigma}\right)\right)  \tag{2.7}
+\end{equation}\]</span>
+<p>where <span class="math display">\[{\rho} := - log\,f.\]</span> As <span class="math inline">\(\log\)</span> is a strictly increasing function, the value which maximizes the original likelihood function is conveniently the same as the one that maximizes the log-likelihood. Therefore, using the log-likelihood when performing maximum likelihood estimation is preferred.</p>
+<p>Under the normal assumption for the random errors <span class="math inline">\(\epsilon_i, \; i=1,2,\ldots,n\)</span>, it is assumed that <span class="math inline">\(f = \mathcal{N}(0, 1)\)</span>. Hence, the likelihood function <span class="math inline">\(\mathcal{L}\)</span> in the normal linear regression model becomes
+<span class="math display" id="eq:L-normal">\[\begin{equation}
+\mathcal{L}(\boldsymbol\beta, \sigma \mid \mathbf{y}) = \prod_{i=1}^n \frac{1}{\sigma} \frac{1}{\sqrt{2\pi}}exp \Big\{{-\frac{(y_i - \mathbf {x}^T_i \boldsymbol{\beta})^2}{2\sigma^2}}\Big\}
+=\left(\frac{1}{\sigma\sqrt{2\pi}}\right)^n exp\Big\{{-\frac{\sum_{i=1}^{n} (y_i - \mathbf {x}^T_i \boldsymbol{\beta})^2}{2\sigma^2}}\Big\},
+\tag{2.8}
+\end{equation}\]</span></p>
+<p>and the log-likelihood function <span class="math inline">\(\ell\)</span> in the <a href="Classical-Linear-Regression.html#eq:logL">(2.7)</a> becomes
+<span class="math display" id="eq:logL-normal">\[\begin{equation}  
+    \ell(\boldsymbol\beta, \sigma \mid \mathbf{y}) = -n\log\left(\sigma\sqrt{2\pi}\right) - \sum_{i=1}^{n} \frac{(y_i - \mathbf {x}^T_i \boldsymbol{\beta})^2}{2\sigma^2}.
+\tag{2.9}
+\end{equation}\]</span></p>
+<p>As discussed above, maximizing likelihood function <span class="math inline">\(\mathcal{L}\)</span> is equivalent to maximizing the log-likelihood function <span class="math inline">\(\ell\)</span>. Therefore, we only need to maximize <span class="math inline">\(\texttt{(3)}\)</span>, which is equivalent to minimize
+<span class="math display" id="eq:object1">\[\begin{equation}
+    n\log\sigma+\sum_{i=1}^{n}
+    \frac{(y_i - \mathbf {x}^T_i \boldsymbol{\beta})^2}{2\sigma^2}.\tag{2.10}
+\end{equation}\]</span></p>
+<p>So the parameter estimates should actually be write as the solution to the optimization question</p>
+<p><span class="math display" id="eq:mle-def">\[\begin{equation}  
+\hat{\boldsymbol{\beta}}_{MLE},\,\hat{\sigma}_{MLE}:=\, \mathop{\mathrm{argmax}}\limits_{{\boldsymbol{\beta}},\,{\sigma}}\,n\log\sigma+\sum_{i=1}^{n}\frac{(y_i - \mathbf{x}^T_i \boldsymbol{\beta})^2}{2\sigma^2}
+\tag{2.11}
+\end{equation}\]</span></p>
+<p>A convenient property of normal linear regression is that we can easily calculate the exact value of the estimates under the classical and some specific assumptions. In this document, we assume that the <span class="math inline">\((\mathbf{X}\mathbf{X}^T)\)</span> matrix is invertible, which could guarantee obtaining the <span class="math inline">\(\beta\)</span> estimate.</p>
+<p>We give the results without proof in the following part. (Process: firstly, view <span class="math inline">\(\sigma\)</span> as a constant, then take partial derivative respect to <span class="math inline">\(\beta\)</span> and let the expression to 0 to get <span class="math inline">\(\sigma\)</span>. Again, take partial derivative respect to <span class="math inline">\(\hat{\sigma}_{MLE}\)</span> and let the expression to 0 to obtain <span class="math inline">\(\hat{\beta}_{MLE}\)</span>). The minimum of <a href="Classical-Linear-Regression.html#eq:object1">(2.10)</a> is attained when</p>
+<p><span class="math display" id="eq:mle">\[\begin{align}
+\hat{\boldsymbol\beta}_{MLE} &amp;= (\mathbf{X}\mathbf{X}^T)^{-1}\mathbf{X}^T\mathbf{y}, \\\ \hat{\sigma}_{MLE}&amp;=\sqrt{\frac{\sum_{i=1}^{n}(y_i - \textbf{x}_i^T\hat{\boldsymbol\beta}_{MLE})^2}{n}}.
+\tag{2.12}
+\end{align}\]</span></p>
+<p>But the <span class="math inline">\(\hat{\sigma}_{MLE}\)</span> is arguably biased for estimating the true <span class="math inline">\(\sigma\)</span>.</p>
+</div>
+<div id="ordinary-least-squares-estimation" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> Ordinary Least Squares Estimation<a href="Classical-Linear-Regression.html#ordinary-least-squares-estimation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Another commonly used estimate for <span class="math inline">\(\beta\)</span> is the Ordinary Least Squares <span class="math inline">\(OLS\)</span>) estimate. Recall that the criteria we use for obtaining <span class="math inline">\(OLS\)</span> estimates is to find the estimator <span class="math inline">\(\hat{\beta}_{OLS}\)</span> that minimizes the Sum of Squared Residuals <span class="math inline">\(SSR\)</span>. <span class="math inline">\(SSR\)</span> could be defined in scalar notation as</p>
+<p><span class="math display" id="eq:ssr">\[\begin{equation}
+\mathtt{SSR}:=\sum_{i=1}^nr_i^2\,
+\tag{2.13}
+\end{equation}\]</span></p>
+<p>where the residual <span class="math inline">\(r_i\)</span> is given by <span class="math inline">\(r_i:=y_i - \mathbf{x}^T_i \boldsymbol{\beta}.\)</span> The vector of residuals <span class="math inline">\(\mathbf{e}\)</span> is given by <span class="math inline">\(\mathbf{e} := (r_{1}, \ldots, r_{n})^T.\)</span><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> Hence, the vector <span class="math inline">\(\mathbf{e}\)</span> could also be computed by: <span class="math inline">\(\mathbf{e} = \mathbf{y} - \mathbf{X}\boldsymbol{\hat{\beta}}.\)</span> The corresponding matrix-form expansion of the Sum of Squared Residuals <a href="Classical-Linear-Regression.html#eq:ssr">(2.13)</a> could be conducted as follows:</p>
+<p><span class="math display" id="eq:ssrm">\[\begin{align}
+\mathtt{SSR}
+&amp;:=\mathbf{e}^T\mathbf{e} \\
+&amp;= \mathbf{y}^T\mathbf{y} − {\hat{\boldsymbol\beta}^T}\mathbf{X}^T\mathbf{y} − \mathbf{y}^T\mathbf{X}{\hat{\boldsymbol\beta}} + \hat{\boldsymbol\beta}^T\mathbf{X}^T\mathbf{X}{\hat{\boldsymbol\beta}}\\
+&amp;= \mathbf{y}^T\mathbf{y} − 2{\hat{\boldsymbol\beta}^T}\mathbf{X}^T\mathbf{y} + {\hat{\boldsymbol\beta}^T}\mathbf{X}^T\mathbf{X}{\hat{\boldsymbol\beta}}
+\tag{2.14}
+\end{align}\]</span></p>
+<p>Take derivative of <a href="Classical-Linear-Regression.html#eq:ssrm">(2.14)</a> with respect to <span class="math inline">\(\boldsymbol{\hat\beta}\)</span> and then let the equation be zero:</p>
+<p><span class="math display" id="eq:ssr-matrix">\[\begin{equation}
+\frac{\partial \mathbf{e}^T\mathbf{e}}{\partial {\hat{\boldsymbol\beta}}} = −2\mathbf{X}^T\mathbf{y} +2\mathbf{X}^T\mathbf{X}{\hat{\boldsymbol\beta}} = \mathbf{0}.
+\tag{2.15}
+\end{equation}\]</span></p>
+<p>As long as the inverse of <span class="math inline">\((\mathbf{X}^T\mathbf{X})\)</span> exists, we could compute the estimate<span class="math inline">\(\hat{\beta}_{OLS}\)</span> without truly applying a lot of<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a> the assumptions:</p>
+<p><span class="math display" id="eq:beta-ols">\[\begin{equation}
+\hat{\boldsymbol\beta}_{OLS} = (\mathbf{X}\mathbf{X}^T)^{-1}\mathbf{X}^T\boldsymbol{\mathcal{y}},
+\tag{2.16}
+\end{equation}\]</span></p>
+<p>which is the same with <span class="math inline">\(\hat{\boldsymbol{\beta}}_{MLE}\)</span> showed in <a href="Classical-Linear-Regression.html#eq:mle">(2.12)</a>. In addition, since we know that <span class="math inline">\(\hat{\sigma}_{MLE}\)</span> is biased, we give the unbiased estimate for <span class="math inline">\({\sigma}\)</span> by</p>
+<p><span class="math display" id="eq:sigma-ols">\[\begin{equation}
+\hat\sigma_{OLS}:=\sqrt{\frac{\sum_{i=1}^{n}(y_i-\boldsymbol{x_i}^T\boldsymbol{\hat{\beta}}_{OLS})^2}{n-p}}.
+\tag{2.17}
+\end{equation}\]</span></p>
+</div>
+<div id="Experi" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Experiments using Classical Linear Regression Methods<a href="Classical-Linear-Regression.html#Experi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>However, it is well known that the OLS estimate is extremely sensitive to the outliers. A single outlier can have large effect on the OLS estimate. Let’s start to demonstrate how outliers could distort the fitted line.</p>
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Despite indicating the downward trend, the fit in the figure shown is nevertheless inaccurate. It hovers between the higher valued data from the top left corner and bottom right and the rest of the data without accurately fitting either groups. This is clearly not a good fit for the data set.</p>
+<p>To standardize the residuals and conduct outliers detection, we let n equal 16 and p equal to 2 in the <a href="Classical-Linear-Regression.html#eq:sigma-ols">(2.17)</a> to calculate the unbiased <span class="math inline">\(\hat{\sigma}_{OLS}\)</span>.</p>
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>In such a situation, no outliers would be deemed suspicious under the <strong><em>the three-sigma rule</em></strong>, which refers to a thumb of rule in emprical science: a traditional measure of the “outlyingness” of an observation xi with respect to a sample is the ratio between its distance to the sample mean and the sample standard deviation (SD) :
+<span class="math display">\[t_i  = \frac{x_i-\bar{x}}{SD}.\]</span>
+Observations with <span class="math inline">\(|t_i | &gt; 3\)</span> are traditionally deemed as suspicious (the “three-sigma rule”), based on the fact that they would be “very unlikely” under normality, since <span class="math inline">\(P(|x| ≥ 3) = 0.003\)</span> for a random variable x with a standard normal distribution.</p>
+<p>In this the residuals plot, there are no suspicious data entries as none of them have standardized residual of absolute value larger than 3. However, this is very misleading given what we observed in the fitted line. We might be able to say that Ordinary Least Squares estimates behave badly here. One remedy is to remove influential observations from the least-squares fit. Hence, we fit another linear model using OLS method to the shock data without 3 problematic data points. Apparently, this updated model is a much more accurate fit for the majority of the data entries.</p>
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Similarly, we compute the unbiased estimate for <span class="math inline">\(\hat\sigma_{OLS}\)</span> and then update the column for standardized residuals column in the shock.update dataset.</p>
+<p>However, when the model is updated by removing the observed outliers, standardized residuals of the data points with entry equal to 0,1,3 significantly increased, rendering value 3.81,4.56, and 7.24 respectively, confirming our suspicion that these entries are outliers.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-9">Table 2.1: </span>Significantly Increasement in Standardized Residuals after Removing the 3 Suspicious Points</caption>
+<colgroup>
+<col width="12%" />
+<col width="6%" />
+<col width="24%" />
+<col width="46%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">n.shocks</th>
+<th align="right">time</th>
+<th align="right">updated.residuals</th>
+<th align="right">ols.standardized.updated.residuals</th>
+<th align="left">class</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">14.2</td>
+<td align="right">7.944199</td>
+<td align="right">7.248111</td>
+<td align="left">outlier</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">11.9</td>
+<td align="right">5.004578</td>
+<td align="right">4.566066</td>
+<td align="left">outlier</td>
+</tr>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">11.4</td>
+<td align="right">4.184767</td>
+<td align="right">3.818089</td>
+<td align="left">outlier</td>
+</tr>
+</tbody>
+</table>
+<p>Also, we plot the OLS standardized residuals computed excluding the points with n.shocks equal to 0,1 and 3. From the updated plot, it is very clear that data entries with n.shocks equal to 0, 1, and 3 are indeed outliers.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="Classical-Linear-Regression.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot updated standardized residuals</span></span>
+<span id="cb2-2"><a href="Classical-Linear-Regression.html#cb2-2" aria-hidden="true" tabindex="-1"></a>r2<span class="ot">&lt;-</span><span class="fu">ggplot</span>(<span class="at">data =</span> bulk)<span class="sc">+</span></span>
+<span id="cb2-3"><a href="Classical-Linear-Regression.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(bulk<span class="sc">$</span>n.shocks, bulk<span class="sc">$</span>ols.standardized.updated.residuals))<span class="sc">+</span></span>
+<span id="cb2-4"><a href="Classical-Linear-Regression.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">3</span>,<span class="at">color=</span><span class="st">&quot;red&quot;</span>)<span class="sc">+</span></span>
+<span id="cb2-5"><a href="Classical-Linear-Regression.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="sc">-</span><span class="dv">3</span>,<span class="at">color=</span><span class="st">&quot;red&quot;</span>)<span class="sc">+</span></span>
+<span id="cb2-6"><a href="Classical-Linear-Regression.html#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;n.shock&quot;</span>)<span class="sc">+</span></span>
+<span id="cb2-7"><a href="Classical-Linear-Regression.html#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span><span class="fl">7.5</span>,<span class="fl">7.5</span>)<span class="sc">+</span></span>
+<span id="cb2-8"><a href="Classical-Linear-Regression.html#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Updated Standardized OLS residuals&quot;</span>)<span class="sc">+</span></span>
+<span id="cb2-9"><a href="Classical-Linear-Regression.html#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb2-10"><a href="Classical-Linear-Regression.html#cb2-10" aria-hidden="true" tabindex="-1"></a>r2<span class="ot">&lt;-</span>r2<span class="sc">+</span><span class="fu">geom_point</span>(<span class="at">data =</span> outlier,<span class="fu">aes</span>(outlier<span class="sc">$</span>n.shocks, outlier<span class="sc">$</span>ols.standardized.updated.residuals),<span class="at">color=</span><span class="st">&quot;red&quot;</span>)</span>
+<span id="cb2-11"><a href="Classical-Linear-Regression.html#cb2-11" aria-hidden="true" tabindex="-1"></a>r2</span></code></pre></div>
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>The lack of indication that these outliers are indeed outliers in our original fit is the result of <strong><em>Masking Effect</em></strong>. In the original OLS fit, data entry with n.shocks equal to 3 deviates the most from the fit. In order to minimize the sum of square of residuals, the regression line is “pulled” toward the outliers and <span class="math inline">\(\hat{\sigma}\)</span> increases, both effects aids to mask the existence of outliers.</p>
+<p>Take data entry with n.shocks equal to 3 as an example, in the original OLS model, it has a residual of 5.55; for the updated fit, the same data entry has a residual of 7.94. The standardized residuals of this data entry are 2.46 and 7.24 respectively. This large discrepancy is observed because the original fit largely adjust itself for the value of the outliers in the fitting process.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">n.shocks</th>
+<th align="right">time</th>
+<th align="right">residuals</th>
+<th align="right">standardized.residuals</th>
+<th align="left">type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">4</td>
+<td align="right">3</td>
+<td align="right">14.2</td>
+<td align="right">5.554265</td>
+<td align="right">2.460839</td>
+<td align="left">original OLS</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="right">3</td>
+<td align="right">14.2</td>
+<td align="right">7.944199</td>
+<td align="right">7.248111</td>
+<td align="left">updated OLS</td>
+</tr>
+</tbody>
+</table>
+<pre><code>Small Questions
+In most cases, we begin by running an OLS regression and doing some diagnostics. We will begin by running an OLS regression and looking at diagnostic plots examining residuals, fitted values, Cook’s distance, and leverage.
+
+Actually, it seems still a little wierd for me to directly say that the points with entry equal to 0, 1, 3 are problematic at the beginning. Because what we get will be different from that if using some classical techniques to detect the outliers.
+plot(ols,las=1)
+shock[c(8,15,4),]</code></pre>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="2">
+<li id="fn2"><p>We use the notation <span class="math inline">\(a := b\)</span> to say that we define <span class="math inline">\(a\)</span> by setting it equal to <span class="math inline">\(b\)</span>.<a href="Classical-Linear-Regression.html#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>Be careful about disguishing between random errors(<span class="math inline">\(\epsilon_i\)</span>) that cannot be observed and residuals (<span class="math inline">\(r_i\)</span>) that can be observed.<a href="Classical-Linear-Regression.html#fnref3" class="footnote-back">↩︎</a></p></li>
+<li id="fn4"><p>Actually, what we only assume so far is about the Linearity: the model is linear in the parameters<a href="Classical-Linear-Regression.html#fnref4" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="classical-robust-regression-introduction-to-the-m-estimation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/williamsDlin/RobStat.gitindex.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
